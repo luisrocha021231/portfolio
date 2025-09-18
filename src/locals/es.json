@@ -1,0 +1,118 @@
+{
+  "hero": {
+    "title": "Hola, soy",
+    "name": "Luis Rocha",
+    "desc": "Desarrollador Backend | Spring Boot",
+    "email-title": "Correo electrónico",
+    "phone-title": "Teléfono",
+    "location-title": "Ubicación",
+    "email-content": "luis.rocha021231@gmail.com",
+    "phone-content": "+52 712 210 9471",
+    "location-content": "Toluca, México",
+    "contact": "Contáctame"
+  },
+  "navbar": {
+    "title": "Portafolio personal",
+    "home": "Inicio",
+    "about": "Sobre mí",
+    "skills": "Habilidades",
+    "projects": "Proyectos",
+    "resume": "Currículum",
+    "contact": "Contacto"
+  },
+  "about": {
+    "title": "Sobre mí",
+    "content": "Soy desarrollador backend con experiencia en Spring Boot, PostgreSQL y Docker. Me interesa la optimización de infraestructura, CI/CD y el diseño de APIs robustas.",
+    "cards": {
+      "mobile": {
+        "title": "Aplicaciones Móviles",
+        "desc": "Desarrollo profesional de aplicaciones para Android e iOS."
+      },
+      "web": {
+        "title": "Desarrollo Web",
+        "desc": "Creación de sitios web profesionales de alta calidad."
+      },
+      "uiux": {
+        "title": "Diseño UI/UX",
+        "desc": "Diseños modernos y de alta calidad, hechos a nivel profesional."
+      },
+      "backend": {
+        "title": "Desarrollo Backend",
+        "desc": "Servicios backend de alto rendimiento diseñados para escalabilidad y experiencia fluida."
+      }
+    }
+  },
+  "skills": {
+    "title": "Habilidades"
+  },
+  "projects": {
+    "title": "Proyectos",
+    "items": {
+      "translator": {
+        "title": "Traductor de codigo con IA",
+        "desc": "App web que traduce código entre diferentes lenguajes de programación usando la API de OpenAI escrita en Python con Flask.",
+        "button": "Ver en GitHub"
+      },
+      "ovenproject": {
+        "title": "Proyecto Oven Inteligente",
+        "desc": "Proyecto que controla un circuito simulador de un horno mediante una app móvil escrita en React Native y una API REST en Java con Spring Boot.",
+        "button": "Ver en GitHub"
+      }
+    },
+    "more": "Más proyectos pronto"
+  },
+  "resume": {
+    "title": "Currículum",
+    "education": "Educación",
+    "experience": "Experiencia",
+    "download": "Descargar CV",
+    "educationItems": [
+      {
+        "school": "Universidad Autónoma del Estado de México",
+        "degree": "Ingeniero en Computación",
+        "period": "2020 — 2025"
+      }
+    ],
+    "experienceItems": [
+      {
+        "role": "Programador",
+        "company": "Instituto Electoral del Estado de México",
+        "period": "Febrero 2025 — Agosto 2025",
+        "location": "Toluca, México",
+        "tasks": [
+          "Diseño y desarrollo de APIs en Spring Boot.",
+          "Gestión de base de datos con PostgreSQL y MongoDB.",
+          "Automatización de despliegues con Docker y CI/CD.",
+          "Colaboración con frontend y equipo de negocio."
+        ]
+      },
+      {
+        "role": "Desarrollador Backend",
+        "company": "Secretaría de Desarrollo Urbano e Infraestructura (Edomex)",
+        "period": "Agosto 2024 — Diciembre 2024",
+        "location": "Toluca, México",
+        "tasks": [
+          "Colaboré en el desarrollo de una API utilizando Spring Boot para la administración de vehículos.",
+          "Contenericé la aplicación con Docker para facilitar su despliegue y portabilidad a otros entornos.",
+          "Trabajé con entornos ágiles utilizando metodologías Scrum."
+        ]
+      }
+    ]
+  },
+  "contact" : {
+    "title" : "Contacto",
+    "email" : "Correo electrónico",
+    "phone" : "Teléfono",
+    "location" : "Ubicación",
+    "email-content" : "luis.rocha021231@gmail.com",
+    "phone-content" : "+52 712 210 9471",
+    "location-content" : "Toluca, México",
+    "send-message" : "Envíame un mensaje",
+    "phone-link" : "+527122109471"
+  },
+  "footer": {
+    "title": "Diseñado con",
+    "sec" : "y",
+    "final" : "Luis Angel Rocha Ronquillo"
+  }
+}

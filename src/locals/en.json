@@ -1,0 +1,116 @@
+{
+  "hero": {
+    "name": "Luis Rocha",
+    "desc": "Backend Developer | Spring Boot",
+    "email-title": "Email",
+    "phone-title": "Phone",
+    "location-title": "Location",
+    "email-content": "luis.rocha021231@gmail.com",
+    "phone-content": "+52 712 210 9471",
+    "location-content": "Toluca, Mexico"
+  },
+  "navbar": {
+    "title": "Personal portfolio",
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "resume": "Resume",
+    "contact": "Contact"
+  },
+  "about": {
+    "title": "About Me",
+    "content": "I am a backend developer with experience in Spring Boot, PostgreSQL, and Docker. I am interested in infrastructure optimization, CI/CD, and designing robust APIs.",
+    "cards": {
+      "mobile": {
+        "title": "Mobile Applications",
+        "desc": "Professional development of applications for Android and iOS."
+      },
+      "web": {
+        "title": "Web Development",
+        "desc": "Creation of high-quality professional websites."
+      },
+      "uiux": {
+        "title": "UI/UX Design",
+        "desc": "Modern, high-quality designs made at a professional level."
+      },
+      "backend": {
+        "title": "Backend Development",
+        "desc": "High-performance backend services designed for scalability and smooth experience."
+      }
+    }
+  },
+  "skills": {
+    "title": "Skills"
+  },
+  "projects": {
+    "title": "Projects",
+    "items": {
+      "translator": {
+        "title": "AI Code Translator",
+        "desc": "Web app that translates code between different programming languages using the OpenAI API written in Python with Flask.",
+        "button": "View on GitHub"
+      },
+      "ovenproject": {
+        "title": "Smart Oven Project",
+        "desc": "Project that controls a simulated oven circuit through a mobile app written in React Native and a Java API REST with Spring Boot.",
+        "button": "View on GitHub"
+      }
+    },
+    "more": "More projects coming soon"
+  },
+  "resume": {
+    "title": "Resume",
+    "education": "Education",
+    "experience": "Experience",
+    "download": "Download CV",
+    "educationItems": [
+      {
+        "school": "Universidad Autónoma del Estado de México",
+        "degree": "Computer Engineering",
+        "period": "2020 — 2025"
+      }
+    ],
+    "experienceItems": [
+      {
+        "role": "Programmer",
+        "company": "Instituto Electoral del Estado de México",
+        "period": "February 2025 — August 2025",
+        "location": "Toluca, Mexico",
+        "tasks": [
+          "Designed and developed APIs with Spring Boot.",
+          "Managed databases with PostgreSQL and MongoDB.",
+          "Automated deployments with Docker and CI/CD.",
+          "Collaborated with frontend and business team."
+        ]
+      },
+      {
+        "role": "Backend Developer",
+        "company": "Secretaría de Desarrollo Urbano e Infraestructura (Edomex)",
+        "period": "August 2024 — December 2024",
+        "location": "Toluca, Mexico",
+        "tasks": [
+          "Collaborated in the development of an API using Spring Boot for vehicle management.",
+          "Containerized the application with Docker to facilitate deployment and portability to other environments.",
+          "Worked with agile environments using Scrum methodologies."
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact",
+    "email": "Email",
+    "phone": "Phone",
+    "location": "Location",
+    "email-content": "luis.rocha021231@gmail.com",
+    "phone-content": "+52 712 210 9471",
+    "location-content": "Toluca, Mexico",
+    "send-message": "Send me a message",
+    "phone-link": "+527122109471"
+  },
+  "footer": {
+    "title": "Built with",
+    "sec": "and",
+    "final": "Luis Angel Rocha Ronquillo"
+  }
+}
