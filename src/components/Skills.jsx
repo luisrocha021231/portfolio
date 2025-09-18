@@ -1,12 +1,18 @@
 import { useTranslation } from "react-i18next";
 
 const skills = [
-  { name: "React", logo: "/logos/React.svg" },
+  { name: "Java", logo: "/logos/java.svg" },
   { name: "Spring Boot", logo: "/logos/Spring.svg" },
-  { name: "Docker", logo: "/logos/Docker.svg" },
+  { name: "React", logo: "/logos/React.svg" },
   { name: "PostgreSQL", logo: "/logos/PostgresSQL.svg" },
+  { name: "Docker", logo: "/logos/Docker.svg" },
   { name: "Jenkins", logo: "/logos/Jenkins.svg" },
-  { name: "AWS", logo: "/logos/AWS.svg" }
+  { name: "Postman", logo: "/logos/Postman.svg" },
+  { name: "Swagger", logo: "/logos/Swagger.svg" },
+  { name: "Git", logo: "/logos/git.svg" },
+  { name: "GitHub", logo: "/logos/GitHub.svg" },
+  { name: "AWS", logo: "/logos/AWS.svg" },
+  { name: "Cloudflare Workers", logo: "/logos/Cloudflare.svg" }
 ];
 
 export default function Skills() {

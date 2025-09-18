@@ -2,11 +2,11 @@
   "hero": {
     "title": "Hola, soy",
     "name": "Luis Rocha",
-    "desc": "Desarrollador Backend | Spring Boot",
+    "desc": "Desarrollador Backend Jr.",
     "email-title": "Correo electrónico",
     "phone-title": "Teléfono",
     "location-title": "Ubicación",
-    "email-content": "luis.rocha021231@gmail.com",
+    "email-content": "contacto@luisrocharo.com",
     "phone-content": "+52 712 210 9471",
     "location-content": "Toluca, México",
     "contact": "Contáctame"
@@ -104,7 +104,7 @@
     "email" : "Correo electrónico",
     "phone" : "Teléfono",
     "location" : "Ubicación",
-    "email-content" : "luis.rocha021231@gmail.com",
+    "email-content" : "contacto@luisrocharo.com",
     "phone-content" : "+52 712 210 9471",
     "location-content" : "Toluca, México",
     "send-message" : "Envíame un mensaje",
@@ -114,5 +114,11 @@
     "title": "Diseñado con",
     "sec" : "y",
     "final" : "Luis Angel Rocha Ronquillo"
-  }
+  },
+  "bugs": {
+    "list": [
+      "El menu de navegación no se adapta responsivamente en la versión móvil.",
+      "El boton de descarga de CV no contiene el archivo adjunto."
+    ]
+}
 }

@@ -1,11 +1,11 @@
 {
   "hero": {
     "name": "Luis Rocha",
-    "desc": "Backend Developer | Spring Boot",
+    "desc": "Backend Developer Jr.",
     "email-title": "Email",
     "phone-title": "Phone",
     "location-title": "Location",
-    "email-content": "luis.rocha021231@gmail.com",
+    "email-content": "contacto@luisrocharo.com",
     "phone-content": "+52 712 210 9471",
     "location-content": "Toluca, Mexico"
   },
@@ -102,7 +102,7 @@
     "email": "Email",
     "phone": "Phone",
     "location": "Location",
-    "email-content": "luis.rocha021231@gmail.com",
+    "email-content": "contacto@luisrocharo.com",
     "phone-content": "+52 712 210 9471",
     "location-content": "Toluca, Mexico",
     "send-message": "Send me a message",
@@ -112,5 +112,11 @@
     "title": "Built with",
     "sec": "and",
     "final": "Luis Angel Rocha Ronquillo"
+  },
+  "bugs": {
+    "list": [
+      "The navigation menu does not adapt responsively on mobile version.",
+      "The CV download button does not contain the attached file."
+    ]
   }
 }
