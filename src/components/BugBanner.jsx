@@ -25,12 +25,12 @@ export default function BugBanner() {
   if (!visible) return null;
 
   return (
-    <div className="w-full">
-      <div className="flex items-center justify-between bg-[#1e1e1f] border border-sky-400 px-4 py-2 rounded-lg shadow-lg transition-all duration-300">
+    <div className="w-full max-w-md mx-auto px-2 sm:px-0">
+      <div className="flex items-center justify-between bg-[#1e1e1f] border border-sky-400 px-3 sm:px-4 py-2 rounded-lg shadow-lg transition-all duration-300 text-xs sm:text-sm">
         <span
-          className={`text-sm text-gray-200 transition-opacity duration-300 ${
+          className={`transition-opacity duration-300 ${
             fade ? "opacity-100" : "opacity-0"
-          }`}
+          } text-gray-200`}
         >
           {bugs[index]}
         </span>

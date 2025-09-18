@@ -11,9 +11,11 @@ export default function Hero() {
       className="relative h-screen flex flex-col justify-center items-center bg-[#121212] text-white px-4"
     >
       {/* Banner de bugs flotando arriba del card */}
-      <div className="mb-6 w-full max-w-md">
-        <BugBanner />
-      </div>
+      {/* Banner de bugs flotando arriba del card */}
+<div className="mb-6 w-full px-2 sm:px-0">
+  <BugBanner />
+</div>
+
 
       {/* Card central */}
       <div className="bg-[#1e1e1f] rounded-2xl shadow-lg p-8 w-full max-w-md text-center">
