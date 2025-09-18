@@ -25,23 +25,32 @@ export default function Projects() {
             {t("projects.title")}
           </span>
         </h2>
-        <div className="grid md:grid-cols-2 gap-6">
+
+        {/* Grid de proyectos */}
+        <div className="grid md:grid-cols-2 gap-8">
           {projects.map((p) => (
             <div
               key={p.key}
-              className="bg-[#2a2a2b] rounded-lg shadow-lg overflow-hidden hover:scale-105 transition"
+              className="relative rounded-2xl overflow-hidden
+                bg-gradient-to-br from-[#1e1e1f]/80 to-[#2a2a2b]/80
+                backdrop-blur-lg border border-sky-400/30 shadow-xl
+                transition transform hover:scale-[1.03] hover:shadow-sky-400/20 hover:border-sky-400/60"
             >
+              {/* Glow decorativo */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-sky-400/10 to-green-400/10 blur-2xl opacity-40 pointer-events-none"></div>
+
               {p.img && (
                 <img
                   src={p.img}
                   alt={t(`projects.items.${p.key}.title`)}
-                  className="w-full h-40 object-cover bg-[#232324]"
+                  className="w-full h-40 object-cover relative z-10"
                   onError={(e) => {
                     e.currentTarget.style.display = "none";
                   }}
                 />
               )}
-              <div className="p-6">
+
+              <div className="p-6 relative z-10">
                 <h3 className="font-bold text-xl">
                   {t(`projects.items.${p.key}.title`)}
                 </h3>
@@ -55,8 +64,8 @@ export default function Projects() {
                     href={p.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 bg-[#1e1e1f] border border-sky-400 px-6 py-3 rounded-lg shadow-lg 
-                              hover:shadow-xl hover:scale-105 transition font-semibold"
+                    className="flex items-center gap-3 bg-[#1e1e1f]/80 border border-sky-400 px-6 py-3 rounded-lg shadow-lg 
+                              hover:shadow-xl hover:scale-105 transition font-semibold relative z-10"
                   >
                     <Github className="w-5 h-5 text-sky-400" />
                     <span className="text-sm font-semibold bg-gradient-to-r from-sky-400 to-green-400 bg-clip-text text-transparent">
@@ -68,6 +77,7 @@ export default function Projects() {
             </div>
           ))}
         </div>
+
         {/* 🔥 Texto animado de "Más proyectos pronto" */}
         <div className="mt-12 text-center">
           <p className="text-white text-lg font-medium">

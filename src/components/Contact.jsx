@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
+import MapboxMap from "./MapboxMap";
 
 export default function Contact() {
   const { t } = useTranslation();
@@ -18,38 +19,66 @@ export default function Contact() {
         <div className="grid md:grid-cols-2 gap-8 items-stretch">
           {/* Tarjeta con info */}
           <div
-            className="bg-[#2a2a2b] rounded-xl shadow-lg p-6 flex flex-col justify-center h-full 
-                  transition transform hover:scale-[1.02] hover:shadow-2xl"
+            className="relative rounded-2xl p-6 flex flex-col justify-center h-full
+    bg-gradient-to-br from-[#1e1e1f]/80 to-[#2a2a2b]/80
+    backdrop-blur-lg border border-sky-400/30 shadow-xl
+    transition transform hover:scale-[1.03] hover:shadow-sky-400/20 hover:border-sky-400/60"
           >
-            <div className="space-y-6">
-              <div className="flex items-center gap-4">
-                <Mail className="w-6 h-6 text-green-400" />
+            {/* Glow decorativo */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-sky-400/10 to-green-400/10 blur-2xl opacity-40 pointer-events-none"></div>
+
+            <div className="relative space-y-6">
+              {/* Email */}
+              <div className="flex items-center gap-4 group">
+                <Mail className="w-7 h-7 text-sky-400 group-hover:scale-110 transition-transform" />
                 <a
                   href={`mailto:${t("contact.email-content")}`}
-                  className="text-lg text-white transition 
-                     hover:bg-gradient-to-r hover:from-sky-400 hover:to-green-400 
-                     hover:bg-clip-text hover:text-transparent"
+                  className="text-lg font-medium text-white transition 
+          hover:bg-gradient-to-r hover:from-sky-400 hover:to-green-400 
+          hover:bg-clip-text hover:text-transparent"
                 >
                   {t("contact.email-content")}
                 </a>
               </div>
-              <div className="flex items-center gap-4">
-                <Phone className="w-6 h-6 text-sky-400" />
-                <span className="text-lg">{t("contact.phone-content")}</span>
+
+              {/* Teléfono */}
+              <div className="flex items-center gap-4 group">
+                <Phone className="w-7 h-7 text-green-400 group-hover:scale-110 transition-transform" />
+                <a
+                  href={`tel:${t("contact.phone-content")}`}
+                  className="text-lg font-medium text-white transition 
+          hover:bg-gradient-to-r hover:from-green-400 hover:to-sky-400 
+          hover:bg-clip-text hover:text-transparent"
+                >
+                  {t("contact.phone-content")}
+                </a>
               </div>
-              <div className="flex items-center gap-4">
-                <MapPin className="w-6 h-6 text-green-400" />
-                <span className="text-lg">{t("contact.location-content")}</span>
+
+              {/* Ubicación */}
+              <div className="flex items-center gap-4 group">
+                <MapPin className="w-7 h-7 text-sky-400 group-hover:scale-110 transition-transform" />
+                <a
+                  href="https://www.google.com/maps?q=Toluca,+México"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-lg font-medium text-white transition 
+          hover:bg-gradient-to-r hover:from-sky-400 hover:to-green-400 
+          hover:bg-clip-text hover:text-transparent"
+                >
+                  {t("contact.location-content")}
+                </a>
               </div>
-              <div className="flex items-center gap-4 mt-4">
-                <Send className="w-6 h-6 text-sky-400" />
+
+              {/* WhatsApp */}
+              <div className="flex items-center gap-4 group mt-4">
+                <Send className="w-7 h-7 text-green-400 group-hover:scale-110 transition-transform" />
                 <a
                   href={`https://wa.me/${t("contact.phone-link")}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-lg text-white transition 
-                     hover:bg-gradient-to-r hover:from-green-400 hover:to-sky-400 
-                     hover:bg-clip-text hover:text-transparent"
+                  className="text-lg font-medium text-white transition 
+          hover:bg-gradient-to-r hover:from-green-400 hover:to-sky-400 
+          hover:bg-clip-text hover:text-transparent"
                 >
                   {t("contact.send-message")}
                 </a>
@@ -58,21 +87,19 @@ export default function Contact() {
           </div>
 
           {/* Mapa embebido */}
-          <div
-            className="rounded-xl overflow-hidden shadow-lg h-full 
-                  transition transform hover:scale-[1.02] hover:shadow-2xl"
-          >
-            <iframe
-              title="Ubicación"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.691264080028!2d-99.6556657!3d19.2826099!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d27627c72a1c73%3A0x4b7c2a395f07a0e4!2sToluca%2C%20M%C3%A9xico!5e0!3m2!1ses!2smx!4v1679500472340!5m2!1ses!2smx"
-              width="100%"
-              height="300"
-              style={{ border: 0 }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
-          </div>
+          {/* Mapa con Mapbox */}
+<div
+  className="relative rounded-2xl overflow-hidden h-full
+  bg-gradient-to-br from-[#1e1e1f]/80 to-[#2a2a2b]/80
+  backdrop-blur-lg border border-green-400/30 shadow-xl
+  transition transform hover:scale-[1.03] hover:shadow-green-400/20 hover:border-green-400/60"
+>
+  {/* Glow decorativo */}
+  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-400/10 to-sky-400/10 blur-2xl opacity-40 pointer-events-none"></div>
+
+  <MapboxMap />
+</div>
+
         </div>
       </div>
     </section>

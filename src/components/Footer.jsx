@@ -3,7 +3,15 @@ import { Github } from "lucide-react";
 
 export default function Footer() {
   const { t } = useTranslation();
-  const commitHash = import.meta.env.VITE_COMMIT_HASH?.slice(0, 7) || "dev";
+
+  // hash del commit (short en producción, "dev" en local)
+  const fullHash = import.meta.env.VITE_COMMIT_HASH || "";
+  const shortHash = fullHash ? fullHash.slice(0, 7) : "dev";
+
+  const repo = "luisrocha021231/tu-repo-del-portafolio"; // cámbialo por tu repo real
+  const commitUrl = fullHash
+    ? `https://github.com/${repo}/commit/${fullHash}`
+    : null;
 
   return (
     <footer className="bg-[#151515] shadow py-6 px-6 text-white">
@@ -16,24 +24,36 @@ export default function Footer() {
               {t("footer.title")}
             </span>
             <div className="flex items-center gap-2 px-3 py-1 rounded-lg">
-              <img src="/logos/React.svg" alt="React" className="h-5 w-5" />
-              <img src="/logos/Tailwind CSS.svg" alt="Tailwind CSS" className="h-5 w-5" />
+              <img src="/logos/React.svg" alt="React" title="React/Vite" className="h-5 w-5" />
+              <img src="/logos/Tailwind CSS.svg" alt="Tailwind CSS" title="Tailwind CSS" className="h-5 w-5" />
+              <img src="/logos/Cloudflare.svg" alt="Cloudflare" title="Cloudflare" className="h-5 w-5" />
+              <img src="/logos/google-analytics.svg" alt="Google Analytics" title="Google Analytics" className="h-4 w-4" href="https://analytics.google.com/" />
             </div>
           </div>
-          <p className="text-sm">
-            © {new Date().getFullYear()} {t("footer.final")}
-          </p>
+          <p className="text-sm">© {new Date().getFullYear()} {t("footer.final")}</p>
 
           {/* Versión y build */}
-          <p className="text-xs text-white mt-1">
-            v1.0.0 • Build {commitHash}
+          <p className="text-xs text-gray-400 mt-1">
+            v1.0.0 • Build{" "}
+            {commitUrl ? (
+              <a
+                href={commitUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline decoration-dotted hover:text-sky-400"
+              >
+                {shortHash}
+              </a>
+            ) : (
+              shortHash
+            )}
           </p>
         </div>
 
         {/* Tarjeta del repositorio */}
         <div className="flex justify-center md:justify-end md:absolute md:right-6">
           <a
-            href="https://github.com/luisrocha021231/tu-repo-del-portafolio"
+            href={`https://github.com/${repo}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 bg-[#1e1e1f] border border-sky-400 px-4 py-2 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition"
@@ -44,6 +64,10 @@ export default function Footer() {
             </span>
           </a>
         </div>
+
+
+
+
       </div>
     </footer>
   );
