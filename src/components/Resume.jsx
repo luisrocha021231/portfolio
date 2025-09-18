@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { BookOpen, Briefcase } from "lucide-react";
+import { BookOpen, Briefcase, Download } from "lucide-react";
 
 export default function Resume() {
   const { t, i18n } = useTranslation();
@@ -58,18 +58,19 @@ export default function Resume() {
             ))}
           </div>
         </div>
+
         {/* Botón de descarga */}
         <div className="mt-12 flex justify-center">
           <a
             href={cvFile}
             download
-            className="group flex items-center gap-2 px-6 py-3 rounded-lg font-semibold shadow transition 
-               bg-gradient-to-r from-sky-400 to-green-400 text-black
-               hover:bg-black hover:text-transparent hover:bg-clip-text 
-               hover:bg-gradient-to-r hover:from-sky-400 hover:to-green-400"
+            className="flex items-center gap-3 bg-[#1e1e1f] border border-sky-400 px-6 py-3 rounded-lg shadow-lg 
+                          hover:shadow-xl hover:scale-105 transition font-semibold"
           >
-            {/* Texto */}
-            {t("resume.download")}
+            <Download className="w-5 h-5 text-sky-400" />
+            <span className="text-sm font-semibold bg-gradient-to-r from-sky-400 to-green-400 bg-clip-text text-transparent">
+              {t("resume.download")}
+            </span>
           </a>
         </div>
       </div>

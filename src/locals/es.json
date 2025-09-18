@@ -113,7 +113,8 @@
   "footer": {
     "title": "Diseñado con",
     "sec" : "y",
-    "final" : "Luis Angel Rocha Ronquillo"
+    "final" : "Luis Angel Rocha Ronquillo",
+    "repo" : "Repositorio del Portafolio"
   },
   "bugs": {
     "list": [

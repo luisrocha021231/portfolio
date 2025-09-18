@@ -111,7 +111,8 @@
   "footer": {
     "title": "Built with",
     "sec": "and",
-    "final": "Luis Angel Rocha Ronquillo"
+    "final": "Luis Angel Rocha Ronquillo",
+    "repo" : "Portfolio Repository"
   },
   "bugs": {
     "list": [

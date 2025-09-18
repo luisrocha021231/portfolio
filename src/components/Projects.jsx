@@ -55,15 +55,13 @@ export default function Projects() {
                     href={p.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative px-4 py-2 rounded-lg bg-gradient-to-r from-sky-400 to-green-400 text-black font-medium shadow transition overflow-hidden"
+                    className="flex items-center gap-3 bg-[#1e1e1f] border border-sky-400 px-6 py-3 rounded-lg shadow-lg 
+                              hover:shadow-xl hover:scale-105 transition font-semibold"
                   >
-                    {/* Texto que cambia a degradado en hover */}
-                    <span className="relative z-10 group-hover:bg-gradient-to-r group-hover:from-sky-400 group-hover:to-green-400 group-hover:bg-clip-text group-hover:text-transparent">
+                    <Github className="w-5 h-5 text-sky-400" />
+                    <span className="text-sm font-semibold bg-gradient-to-r from-sky-400 to-green-400 bg-clip-text text-transparent">
                       {t(`projects.items.${p.key}.button`)}
                     </span>
-
-                    {/* Fondo blanco en hover */}
-                    <span className="absolute inset-0 rounded-lg bg-[#2a2a2b] opacity-0 group-hover:opacity-100 transition"></span>
                   </a>
                 </div>
               </div>
