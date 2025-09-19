@@ -13,6 +13,7 @@
     "title": "Personal portfolio",
     "home": "Home",
     "about": "About",
+    "favorites": "Interests",
     "skills": "Skills",
     "projects": "Projects",
     "resume": "Resume",
@@ -39,6 +40,10 @@
         "desc": "High-performance backend services designed for scalability and smooth experience."
       }
     }
+  },
+  "favorites": {
+    "title": "Interests",
+    "games": "Favorite Videogames"
   },
   "skills": {
     "title": "Skills"

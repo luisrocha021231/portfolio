@@ -15,6 +15,7 @@
     "title": "Portafolio personal",
     "home": "Inicio",
     "about": "Sobre mí",
+    "favorites": "Intereses",
     "skills": "Habilidades",
     "projects": "Proyectos",
     "resume": "Currículum",
@@ -41,6 +42,10 @@
         "desc": "Servicios backend de alto rendimiento diseñados para escalabilidad y experiencia fluida."
       }
     }
+  },
+  "favorites": {
+    "title": "Intereses",
+    "games": "Videojuegos Favoritos"
   },
   "skills": {
     "title": "Habilidades"
@@ -115,7 +120,7 @@
     "sec": "y",
     "final": "Luis Angel Rocha Ronquillo",
     "repo": "Repositorio del Portafolio",
-    "stats" : "y monitoreado con"
+    "stats": "y monitoreado con"
   },
   "bugs": {
     "list": [

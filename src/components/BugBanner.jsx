@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { X } from "lucide-react";
 
@@ -8,19 +8,22 @@ export default function BugBanner() {
   const [index, setIndex] = useState(0);
   const [fade, setFade] = useState(true);
 
-  // obtenemos los bugs desde el archivo i18n (array)
-  const bugs = t("bugs.list", { returnObjects: true });
+  // Memoriza el array de bugs para que no cambie en cada render
+  const bugs = useMemo(() => t("bugs.list", { returnObjects: true }), [t]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setFade(false);
       setTimeout(() => {
-        setIndex((prev) => (prev + 1) % bugs.length);
+        // Ahora toma un bug aleatorio sin bucle infinito
+        const randomIndex = Math.floor(Math.random() * bugs.length);
+        setIndex(randomIndex);
         setFade(true);
       }, 300);
     }, 4000);
+
     return () => clearInterval(interval);
-  }, [bugs.length]);
+  }, [bugs.length]); // ahora solo depende del length
 
   if (!visible) return null;
 

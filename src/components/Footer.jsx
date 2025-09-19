@@ -3,15 +3,8 @@ import { Github } from "lucide-react";
 
 export default function Footer() {
   const { t } = useTranslation();
-
-  // hash del commit (short en producción, "dev" en local)
-  const fullHash = import.meta.env.VITE_COMMIT_HASH || "";
-  const shortHash = fullHash ? fullHash.slice(0, 7) : "dev";
-
-  const repo = "luisrocha021231/tu-repo-del-portafolio"; // cámbialo por tu repo real
-  const commitUrl = fullHash
-    ? `https://github.com/${repo}/commit/${fullHash}`
-    : null;
+  
+  const repo = "luisangelrocharonquillo/portfolio";
 
   return (
     <footer className="bg-[#151515] shadow py-6 px-6 text-white">
@@ -27,26 +20,15 @@ export default function Footer() {
               <img src="/logos/React.svg" alt="React" title="React/Vite" className="h-5 w-5" />
               <img src="/logos/Tailwind CSS.svg" alt="Tailwind CSS" title="Tailwind CSS" className="h-5 w-5" />
               <img src="/logos/Cloudflare.svg" alt="Cloudflare" title="Cloudflare" className="h-5 w-5" />
-              <img src="/logos/google-analytics.svg" alt="Google Analytics" title="Google Analytics" className="h-4 w-4" href="https://analytics.google.com/" />
+              <img src="/logos/google-analytics.svg" alt="Google Analytics" title="Google Analytics" className="h-4 w-4" />
+              <img src="/logos/mapbox.svg" alt="Mapbox" title="Mapbox" className="h-14 w-14" />
             </div>
           </div>
           <p className="text-sm">© {new Date().getFullYear()} {t("footer.final")}</p>
 
           {/* Versión y build */}
           <p className="text-xs text-gray-400 mt-1">
-            v1.0.0 • Build{" "}
-            {commitUrl ? (
-              <a
-                href={commitUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline decoration-dotted hover:text-sky-400"
-              >
-                {shortHash}
-              </a>
-            ) : (
-              shortHash
-            )}
+            v1.0.0
           </p>
         </div>
 
@@ -64,10 +46,6 @@ export default function Footer() {
             </span>
           </a>
         </div>
-
-
-
-
       </div>
     </footer>
   );

@@ -86,19 +86,17 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Mapa embebido */}
           {/* Mapa con Mapbox */}
-<div
-  className="relative rounded-2xl overflow-hidden h-full
-  bg-gradient-to-br from-[#1e1e1f]/80 to-[#2a2a2b]/80
-  backdrop-blur-lg border border-green-400/30 shadow-xl
-  transition transform hover:scale-[1.03] hover:shadow-green-400/20 hover:border-green-400/60"
->
-  {/* Glow decorativo */}
-  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-400/10 to-sky-400/10 blur-2xl opacity-40 pointer-events-none"></div>
-
-  <MapboxMap />
-</div>
+          <div
+            className="relative rounded-2xl overflow-hidden h-full
+            bg-gradient-to-br from-[#1e1e1f]/80 to-[#2a2a2b]/80
+            backdrop-blur-lg border border-green-400/30 shadow-xl
+            transition transform hover:scale-[1.03] hover:shadow-green-400/20 hover:border-green-400/60"
+          >
+            {/* Glow decorativo */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-400/10 to-sky-400/10 blur-2xl opacity-40 pointer-events-none"></div>
+              <MapboxMap />
+          </div>
 
         </div>
       </div>
