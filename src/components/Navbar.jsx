@@ -29,7 +29,6 @@ export default function Navbar() {
           <ul className="hidden lg:flex items-center gap-6">
             <li><a href="#inicio" className="font-bold bg-gradient-to-r from-sky-400 to-green-400 bg-clip-text text-transparent hover:text-white">{t("navbar.home")}</a></li>
             <li><a href="#sobremi" className="font-bold bg-gradient-to-r from-sky-400 to-green-400 bg-clip-text text-transparent hover:text-white">{t("navbar.about")}</a></li>
-            <li><a href="#favorites" className="font-bold bg-gradient-to-r from-sky-400 to-green-400 bg-clip-text text-transparent hover:text-white">{t("navbar.favorites")}</a></li>
             <li><a href="#skills" className="font-bold bg-gradient-to-r from-sky-400 to-green-400 bg-clip-text text-transparent hover:text-white">{t("navbar.skills")}</a></li>
             <li><a href="#proyectos" className="font-bold bg-gradient-to-r from-sky-400 to-green-400 bg-clip-text text-transparent hover:text-white">{t("navbar.projects")}</a></li>
             <li><a href="#resume" className="font-bold bg-gradient-to-r from-sky-400 to-green-400 bg-clip-text text-transparent hover:text-white">{t("navbar.resume")}</a></li>
@@ -83,7 +82,6 @@ export default function Navbar() {
           <ul className="flex flex-col gap-4 px-7 py-5">
             <li><a href="#inicio" onClick={() => setIsOpen(false)} className="block font-bold bg-gradient-to-r from-sky-400 to-green-400 bg-clip-text text-transparent hover:text-white">{t("navbar.home")}</a></li>
             <li><a href="#sobremi" onClick={() => setIsOpen(false)} className="block font-bold bg-gradient-to-r from-sky-400 to-green-400 bg-clip-text text-transparent hover:text-white">{t("navbar.about")}</a></li>
-            <li><a href="#favorites" onClick={() => setIsOpen(false)} className="block font-bold bg-gradient-to-r from-sky-400 to-green-400 bg-clip-text text-transparent hover:text-white">{t("navbar.favorites")}</a></li>
             <li><a href="#skills" onClick={() => setIsOpen(false)} className="block font-bold bg-gradient-to-r from-sky-400 to-green-400 bg-clip-text text-transparent hover:text-white">{t("navbar.skills")}</a></li>
             <li><a href="#proyectos" onClick={() => setIsOpen(false)} className="block font-bold bg-gradient-to-r from-sky-400 to-green-400 bg-clip-text text-transparent hover:text-white">{t("navbar.projects")}</a></li>
             <li><a href="#resume" onClick={() => setIsOpen(false)} className="block font-bold bg-gradient-to-r from-sky-400 to-green-400 bg-clip-text text-transparent hover:text-white">{t("navbar.resume")}</a></li>

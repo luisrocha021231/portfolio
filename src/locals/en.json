@@ -221,5 +221,9 @@
       "In the middle of difficulty lies opportunity. 🔑 - Albert Einstein",
       "Life begins at the end of your comfort zone. 🏔️ - Neale Donald Walsch"
     ]
+  },
+  "mapbox" : {
+    "map-overlay-desktop": "Hold Ctrl or ⌘ to move the map",
+    "map-overlay-mobile": "Use two fingers to move and zoom the map"
   }
 }

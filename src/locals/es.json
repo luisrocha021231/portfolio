@@ -223,5 +223,9 @@
       "En la dificultad está la oportunidad. 🔑 - Albert Einstein",
       "La vida comienza al final de tu zona de confort. 🏔️ - Neale Donald Walsch"
     ]
+  },
+  "mapbox" : {
+    "map-overlay-desktop": "Mantén presionado Ctrl o ⌘ para mover el mapa",
+    "map-overlay-mobile": "Usa dos dedos para mover y hacer zoom en el mapa"
   }
 }
