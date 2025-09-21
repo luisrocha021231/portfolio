@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Smartphone, Code2, PenTool, Server } from "lucide-react"; // íconos
+import { LaptopMinimal, Database, Cloud, Server } from "lucide-react"; // íconos
 
 export default function About() {
   const { t } = useTranslation();
@@ -8,29 +8,28 @@ export default function About() {
     {
       title: t("about.cards.mobile.title"),
       desc: t("about.cards.mobile.desc"),
-      icon: <Smartphone className="w-8 h-8 text-green-400" />,
+      icon: <Server className="w-8 h-8 text-green-400" />,
       color: "green"
     },
     {
       title: t("about.cards.web.title"),
       desc: t("about.cards.web.desc"),
-      icon: <Code2 className="w-8 h-8 text-sky-400" />,
+      icon: <Database className="w-8 h-8 text-sky-400" />,
       color: "sky"
     },
     {
       title: t("about.cards.uiux.title"),
       desc: t("about.cards.uiux.desc"),
-      icon: <PenTool className="w-8 h-8 text-green-400" />,
+      icon: <Cloud className="w-8 h-8 text-green-400" />,
       color: "green"
     },
     {
       title: t("about.cards.backend.title"),
       desc: t("about.cards.backend.desc"),
-      icon: <Server className="w-8 h-8 text-sky-400" />,
+      icon: <LaptopMinimal className="w-8 h-8 text-sky-400" />,
       color: "sky"
     }
   ];
-
   return (
     <section id="sobremi" className="py-20 bg-[#1e1e1f] text-white">
       <div className="container mx-auto px-6 text-center">

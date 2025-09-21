@@ -6,13 +6,13 @@ const skills = [
   { name: "React", logo: "/logos/React.svg" },
   { name: "PostgreSQL", logo: "/logos/PostgresSQL.svg" },
   { name: "Docker", logo: "/logos/Docker.svg" },
-  { name: "Jenkins", logo: "/logos/Jenkins.svg" },
   { name: "Postman", logo: "/logos/Postman.svg" },
   { name: "Swagger", logo: "/logos/Swagger.svg" },
   { name: "Git", logo: "/logos/git.svg" },
   { name: "GitHub", logo: "/logos/GitHub.svg" },
+  { name: "Heroku", logo: "/logos/Heroku.svg" },
   { name: "AWS", logo: "/logos/AWS.svg" },
-  { name: "Cloudflare Workers", logo: "/logos/Cloudflare.svg" }
+  { name: "Cloudflare", logo: "/logos/Cloudflare.svg" }
 ];
 
 export default function Skills() {

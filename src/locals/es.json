@@ -23,23 +23,23 @@
   },
   "about": {
     "title": "Sobre mí",
-    "content": "Soy desarrollador backend con experiencia en Spring Boot, PostgreSQL y Docker. Me interesa la optimización de infraestructura, CI/CD y el diseño de APIs robustas.",
+    "content": "Ingeniero en Computación con interés en el diseño y construcción de aplicaciones completas. Me gusta aprender nuevas tecnologías, resolver problemas con soluciones prácticas y trabajar en proyectos que integren diferentes áreas como backend, bases de datos, despliegue en la nube y frontend.",
     "cards": {
       "mobile": {
-        "title": "Aplicaciones Móviles",
-        "desc": "Desarrollo profesional de aplicaciones para Android e iOS."
+        "title": "Desarrollo Backend",
+        "desc": "Me gusta trabajar con Java y Spring Boot para crear APIs y servicios que resuelvan problemas de manera práctica."
       },
       "web": {
-        "title": "Desarrollo Web",
-        "desc": "Creación de sitios web profesionales de alta calidad."
+        "title": "Bases de Datos",
+        "desc": "Tengo experiencia con SQL (PostgreSQL) en proyectos escolares y personales."
       },
       "uiux": {
-        "title": "Diseño UI/UX",
-        "desc": "Diseños modernos y de alta calidad, hechos a nivel profesional."
+        "title": "CI/CD & Cloud",
+        "desc": "He practicado con GitHub Actions, Docker y he desplegado proyectos en la nube usando servicios de Heroku, Cloudflare, AWS y DigitalOcean."
       },
       "backend": {
-        "title": "Desarrollo Backend",
-        "desc": "Servicios backend de alto rendimiento diseñados para escalabilidad y experiencia fluida."
+        "title": "Desarrollo Frontend",
+        "desc": "Uso React para crear interfaces simples y funcionales, con enfoque en proyectos de práctica, escolares y portafolio."
       }
     }
   },
@@ -54,9 +54,10 @@
     "title": "Proyectos",
     "items": {
       "translator": {
-        "title": "Traductor de codigo con IA",
-        "desc": "App web que traduce código entre diferentes lenguajes de programación usando la API de OpenAI escrita en Python con Flask.",
-        "button": "Ver en GitHub"
+        "title": "Traductor de código con IA",
+        "desc": "App web que traduce código entre diferentes lenguajes de programación. Implementado con Spring Boot (en Heroku Dynos) y React (en Cloudflare Pages). Backend integrado con la API de OpenAI, CI/CD en GitHub Actions para desliegue automático.",
+        "button": "Ver en GitHub",
+        "demostration": "Ver demostración"
       },
       "ovenproject": {
         "title": "Proyecto Oven Inteligente",
@@ -85,10 +86,9 @@
         "period": "Febrero 2025 — Agosto 2025",
         "location": "Toluca, México",
         "tasks": [
-          "Diseño y desarrollo de APIs en Spring Boot.",
-          "Gestión de base de datos con PostgreSQL y MongoDB.",
-          "Automatización de despliegues con Docker y CI/CD.",
-          "Colaboración con frontend y equipo de negocio."
+          "Desarrollo de Backend en Spring Boot, JPA y PostgreSQL para migración de sistemas existentes.",
+          "Implementación de schedulers en Spring Boot para tareas automatizadas.",
+          "Desarrollo de módulos frontend con Thymeleaf y Bootstrap."
         ]
       },
       {

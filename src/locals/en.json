@@ -21,23 +21,23 @@
   },
   "about": {
     "title": "About Me",
-    "content": "I am a backend developer with experience in Spring Boot, PostgreSQL, and Docker. I am interested in infrastructure optimization, CI/CD, and designing robust APIs.",
+    "content": "Computer Engineering with an interest in designing and building full-stack applications. I enjoy learning new technologies, solving problems with practical solutions, and working on projects that integrate different areas such as backend, databases, cloud deployment, and frontend.",
     "cards": {
       "mobile": {
-        "title": "Mobile Applications",
-        "desc": "Professional development of applications for Android and iOS."
+        "title": "Backend Development",
+        "desc": "I enjoy working with Java and Spring Boot to create APIs and services that solve problems practically."
       },
       "web": {
-        "title": "Web Development",
-        "desc": "Creation of high-quality professional websites."
+        "title": "Database Management",
+        "desc": "I have experience with SQL (PostgreSQL) in school and personal projects."
       },
       "uiux": {
-        "title": "UI/UX Design",
-        "desc": "Modern, high-quality designs made at a professional level."
+        "title": "CI/CD & Cloud",
+        "desc": "I have practiced with GitHub Actions, Docker, and have deployed projects in the cloud using services like Heroku, Cloudflare, AWS, and DigitalOcean."
       },
       "backend": {
-        "title": "Backend Development",
-        "desc": "High-performance backend services designed for scalability and smooth experience."
+        "title": "Frontend Development",
+        "desc": "I use React to create simple and functional interfaces, focusing on practice, school, and portfolio projects."
       }
     }
   },
@@ -53,8 +53,9 @@
     "items": {
       "translator": {
         "title": "AI Code Translator",
-        "desc": "Web app that translates code between different programming languages using the OpenAI API written in Python with Flask.",
-        "button": "View on GitHub"
+        "desc": "Web app that translates code between different programming languages. Implemented with Spring Boot (on Heroku Dynos) and React (on Cloudflare Pages). Backend integrated with the OpenAI API, CI/CD in GitHub Actions for automatic deployment.",
+        "button": "View on GitHub",
+        "demostration": "View demostration"
       },
       "ovenproject": {
         "title": "Smart Oven Project",
@@ -83,10 +84,9 @@
         "period": "February 2025 — August 2025",
         "location": "Toluca, Mexico",
         "tasks": [
-          "Designed and developed APIs with Spring Boot.",
-          "Managed databases with PostgreSQL and MongoDB.",
-          "Automated deployments with Docker and CI/CD.",
-          "Collaborated with frontend and business team."
+          "Developed Backend using Spring Boot, JPA, and PostgreSQL for migrating existing systems.",
+          "Implemented schedulers in Spring Boot for automated tasks.",
+          "Developed frontend modules with Thymeleaf and Bootstrap."
         ]
       },
       {
