@@ -7,7 +7,7 @@ export default function Resume() {
   const education = t("resume.educationItems", { returnObjects: true });
   const experience = t("resume.experienceItems", { returnObjects: true });
 
-  const cvFile = i18n.language === "es" ? "/files/luisrocharonquillo_cv.pdf" : "/files/luisrocharonquillo_en_cv.pdf";
+  const cvFile = i18n.language === "es" ? "/files/luisrocharonquillo_cv.pdf" : "/files/luisrocharonquillo_cv_en.pdf";
 
   return (
     <section id="resume" className="py-20 bg-[#121212] text-white">
