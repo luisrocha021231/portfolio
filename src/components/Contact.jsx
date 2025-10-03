@@ -95,7 +95,7 @@ export default function Contact() {
           >
             {/* Glow decorativo */}
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-400/10 to-sky-400/10 blur-2xl opacity-40 pointer-events-none"></div>
-             {/* <MapboxMap/> */}
+             <MapboxMap/>
           </div>
 
         </div>
