@@ -1,6 +1,5 @@
 import { Mail, Phone, MapPin, Linkedin, Github, MessageCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import BugBanner from "./BugBanner";
 
 export default function Hero() {
   const { t } = useTranslation();
@@ -10,10 +9,6 @@ export default function Hero() {
       id="inicio"
       className="relative h-screen flex flex-col justify-center items-center bg-[#121212] text-white px-4"
     >
-      {/* Banner de bugs flotando arriba del card */}
-      <div className="mb-6 w-full px-2 sm:px-0">
-        <BugBanner />
-      </div>
 
       {/* Card central con glow */}
       <div

@@ -7,7 +7,7 @@ export default function Footer() {
   const repo = "luisangelrocharonquillo/portfolio";
 
   return (
-    <footer className="bg-[#151515] shadow py-6 px-6 text-white">
+    <footer className="bg-[#1e1e1f] shadow py-6 px-6 text-white">
       <div className="flex flex-col md:flex-row md:items-center md:justify-center relative">
         
         {/* Sección principal */}
