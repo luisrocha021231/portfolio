@@ -4,7 +4,7 @@ import { Github, Play } from "lucide-react";
 const projects = [
   {
     key: "translator",
-    img: "/public/BannerIACodeTranslator.png",
+    img: "/BannerIACodeTranslator.png",
     link: "https://github.com/luisrocha021231/compiladoresproject",
     linkDemo: "https://iacodetranslator.luisrocharo.com/",
   },
