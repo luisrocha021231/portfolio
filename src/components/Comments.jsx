@@ -113,7 +113,7 @@ export default function Comments() {
             ))
           ) : (
             <p className="text-gray-400 text-center col-span-2">
-              No hay comentarios aún. 🚀 Sé el primero en dejar uno.
+              {t("comments.comments-message")}
             </p>
           )}
         </div>
