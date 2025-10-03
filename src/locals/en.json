@@ -130,6 +130,7 @@
     "comment-placeholder": "Write your comment...",
     "text-comments": "Latest comments",
     "send" : "Send",
-    "sending" : "Sending..."
+    "sending" : "Sending...",
+    "comments-message" : "No comments yet. Be the first to leave one."
   }
 }

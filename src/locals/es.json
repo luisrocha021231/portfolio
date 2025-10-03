@@ -132,6 +132,7 @@
     "comment-placeholder": "Escribe tu comentario...",
     "text-comments": "Últimos comentarios",
     "send" : "Enviar",
-    "sending" : "Enviando..."
+    "sending" : "Enviando...",
+    "comments-message" : "No hay comentarios aún. Sé el primero en dejar uno."
   }
 }
