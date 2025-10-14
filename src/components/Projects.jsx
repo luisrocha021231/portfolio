@@ -3,6 +3,12 @@ import { Github, Play } from "lucide-react";
 
 const projects = [
   {
+    key: "horizonapi",
+    img: "/BannerHorizonAPI.png",
+    link: "https://github.com/luisrocha021231/horizonapi",
+    linkDemo: "https://horizonapi.luisrocharo.com",
+  },
+  {
     key: "translator",
     img: "/BannerIACodeTranslator.png",
     link: "https://github.com/luisrocha021231/compiladoresproject",

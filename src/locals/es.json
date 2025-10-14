@@ -53,6 +53,12 @@
   "projects": {
     "title": "Proyectos",
     "items": {
+      "horizonapi": {
+        "title": "Horizon API",
+        "desc": "API RESTful con datos del Universo de Horizon, con integración de IA (GPT-5), documentación Swagger y cacheo en Redis. Desarrollada con Spring Boot, JPA, PostgreSQL. Desplegada en Cloudflare Pages y Heroku Dynos, con CI/CD en GitHub Actions.",
+        "button": "Ver en GitHub",
+        "demostration": "Ver demostración"
+      },
       "translator": {
         "title": "Traductor de código con IA",
         "desc": "App web que traduce código entre diferentes lenguajes de programación. Implementado con Spring Boot (en Heroku Dynos) y React (en Cloudflare Pages). Backend integrado con la API de OpenAI, CI/CD en GitHub Actions para desliegue automático.",
