@@ -18,7 +18,7 @@ function App() {
       <Projects />
       <Resume />
       <Contact />
-      <Comments />
+      {/* <Comments /> */}
       <Footer />
     </>
   );
