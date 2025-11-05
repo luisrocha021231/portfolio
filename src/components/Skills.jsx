@@ -12,7 +12,8 @@ const skills = [
   { name: "GitHub", logo: "/logos/GitHub.svg" },
   { name: "Heroku", logo: "/logos/Heroku.svg" },
   { name: "AWS", logo: "/logos/AWS.svg" },
-  { name: "Cloudflare", logo: "/logos/Cloudflare.svg" }
+  { name: "Cloudflare", logo: "/logos/Cloudflare.svg" },
+  { name: "Dokploy", logo: "/logos/dokploy.png" }
 ];
 
 export default function Skills() {
