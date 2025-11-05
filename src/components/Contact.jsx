@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
-import MapboxMap from "./MapboxMap";
 
 export default function Contact() {
   const { t } = useTranslation();
@@ -95,7 +94,15 @@ export default function Contact() {
           >
             {/* Glow decorativo */}
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-400/10 to-sky-400/10 blur-2xl opacity-40 pointer-events-none"></div>
-             <MapboxMap/>
+              <iframe
+                title="Mapa Toluca"
+                src="https://www.google.com/maps?q=19.2826,-99.6557&z=13&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0, borderRadius: "12px" }}
+                allowFullScreen
+                loading="lazy"
+              ></iframe>
           </div>
 
         </div>
