@@ -4,19 +4,19 @@ import { Github, Play } from "lucide-react";
 const projects = [
   {
     key: "horizonapi",
-    img: "/BannerHorizonAPI.png",
+    img: "/BannerHorizonAPI.webp",
     link: "https://github.com/luisrocha021231/horizonapi",
     linkDemo: "https://horizonapi.luisrocharo.com",
   },
   {
     key: "translator",
-    img: "/BannerIACodeTranslator.png",
+    img: "/BannerIACodeTranslator.webp",
     link: "https://github.com/luisrocha021231/compiladoresproject",
     linkDemo: "https://iacodetranslator.luisrocharo.com/",
   },
   {
     key: "ovenproject",
-    img: "/Banner1.png",
+    img: "/Banner1.webp",
     link: "https://github.com/luisrocha021231/computingproject",
   },
 ];

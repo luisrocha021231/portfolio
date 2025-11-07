@@ -22,7 +22,7 @@ export default function Hero() {
 
         {/* Avatar */}
         <div className="relative w-32 h-32 mx-auto mb-4 z-10">
-          <img src="/Avatar.png" alt="Perfil" className="rounded-2xl shadow-lg" />
+          <img src="/Avatar.webp" alt="Perfil" className="rounded-2xl shadow-lg" />
           <span className="absolute bottom-2 right-2 flex h-4 w-4">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#37f712] opacity-75"></span>
             <span className="relative inline-flex rounded-full h-4 w-4 bg-[#37f712]"></span>
