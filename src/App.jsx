@@ -12,6 +12,7 @@ function App() {
   return (
     <>
       <Navbar />
+      <main id="main-content" role="main">
       <Hero />
       <About />
       <Skills />
@@ -19,6 +20,7 @@ function App() {
       <Resume />
       <Contact />
       {/* <Comments /> */}
+      </main>
       <Footer />
     </>
   );

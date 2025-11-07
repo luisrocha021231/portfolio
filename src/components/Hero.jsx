@@ -82,13 +82,13 @@ export default function Hero() {
 
         {/* Redes sociales */}
         <div className="flex justify-center space-x-4 text-green-400 relative z-10">
-          <a href="https://linkedin.com/in/luisrocharonq" target="_blank" rel="noopener noreferrer">
+          <a href="https://linkedin.com/in/luisrocharonq" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn of Luis Rocha">
             <Linkedin className="w-6 h-6 hover:text-sky-400" />
           </a>
-          <a href="https://github.com/luisrocha021231" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/luisrocha021231" target="_blank" rel="noopener noreferrer" aria-label="GitHub of Luis Rocha">
             <Github className="w-6 h-6 hover:text-sky-400" />
           </a>
-          <a href="https://wa.me/527122109471" target="_blank" rel="noopener noreferrer">
+          <a href="https://wa.me/527122109471" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp of Luis Rocha">
             <MessageCircle className="w-6 h-6 hover:text-sky-400" />
           </a>
         </div>
