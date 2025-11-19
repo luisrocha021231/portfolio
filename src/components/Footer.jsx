@@ -20,8 +20,8 @@ export default function Footer() {
               <img src="/logos/React.svg" alt="React" title="React/Vite" className="h-5 w-5" />
               <img src="/logos/Tailwind CSS.svg" alt="Tailwind CSS" title="Tailwind CSS" className="h-5 w-5" />
               <img src="/logos/Cloudflare.svg" alt="Cloudflare" title="Cloudflare" className="h-5 w-5" />
-              <img src="/logos/google-analytics.svg" alt="Google Analytics" title="Google Analytics" className="h-4 w-4" />
-              <img src="/logos/mapbox.svg" alt="Mapbox" title="Mapbox" className="h-14 w-14" />
+              {/* <img src="/logos/google-analytics.svg" alt="Google Analytics" title="Google Analytics" className="h-4 w-4" /> */}
+              {/* <img src="/logos/mapbox.svg" alt="Mapbox" title="Mapbox" className="h-14 w-14" /> */}
             </div>
           </div>
           <p className="text-sm">© {new Date().getFullYear()} {t("footer.final")}</p>
