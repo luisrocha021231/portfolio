@@ -7,7 +7,6 @@
     "phone-title": "Teléfono",
     "location-title": "Ubicación",
     "email-content": "luis.rocha021231@gmail.com",
-    "phone-content-1": "+52 712 210 9471",
     "phone-content-2": "+52 56 6407 3124",
     "location-content": "Toluca, México",
     "contact": "Contáctame"
@@ -120,7 +119,7 @@
     "phone-content": "+52 56 6407 3124",
     "location-content": "Toluca, México",
     "send-message": "Envíame un mensaje",
-    "phone-link": "+527122109471"
+    "phone-link": "+525664073124"
   },
   "footer": {
     "title": "Built with",

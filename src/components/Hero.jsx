@@ -63,7 +63,6 @@ export default function Hero() {
             </div>
             <div>
               <p className="text-xs text-gray-400">{t("hero.phone-title")}</p>
-              <p className="text-sm">{t("hero.phone-content-1")}</p>
               <p className="text-sm">{t("hero.phone-content-2")}</p>
             </div>
           </div>
