@@ -85,7 +85,16 @@
     ],
     "experienceItems": [
       {
-        "role": "Programmer",
+        "role": "Developer",
+        "company": "Instituto Electoral del Estado de México",
+        "period": "January 2026 — Present",
+        "location": "Toluca, Mexico",
+        "tasks": [
+
+        ]
+      },
+      {
+        "role": "Developer",
         "company": "Instituto Electoral del Estado de México",
         "period": "February 2025 — August 2025",
         "location": "Toluca, Mexico",
