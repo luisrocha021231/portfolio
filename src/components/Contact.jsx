@@ -4,107 +4,71 @@ import { Mail, Phone, MapPin, Send } from "lucide-react";
 export default function Contact() {
   const { t } = useTranslation();
 
+  const CONTACT_LINKS = [
+    {
+      icon: Mail,
+      label: t("contact.email-content"),
+      href: `mailto:${t("contact.email-content")}`,
+    },
+    {
+      icon: Phone,
+      label: t("contact.phone-content"),
+      href: `tel:${t("contact.phone-content")}`,
+    },
+    {
+      icon: MapPin,
+      label: t("contact.location-content"),
+      href: "https://www.google.com/maps?q=Toluca,+México",
+    },
+    {
+      icon: Send,
+      label: t("contact.send-message"),
+      href: `https://wa.me/${t("contact.phone-link")}`,
+    },
+  ];
+
   return (
-    <section id="contacto" className="py-20 bg-[#1e1e1f] text-white">
-      <div className="container mx-auto px-6">
-        {/* Título */}
-        <h2 className="mb-12 text-center">
-          <span className="text-3xl bg-gradient-to-r from-sky-400 to-green-400 bg-clip-text text-transparent font-bold">
-            {t("contact.title")}
-          </span>
-        </h2>
+    <section
+      id="contacto"
+      className="py-24 bg-[#12141c] text-[#f5f5f7]"
+      style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+    >
+      <div className="max-w-5xl mx-auto px-6">
+        <h2 className="text-3xl font-bold mb-12 text-[#ec4b6a]">{t("contact.title")}</h2>
 
-        {/* Grid: Información y Mapa */}
-        <div className="grid md:grid-cols-2 gap-8 items-stretch">
+        <div className="grid md:grid-cols-2 gap-6 items-stretch">
           {/* Tarjeta con info */}
-          <div
-            className="relative rounded-2xl p-6 flex flex-col justify-center h-full
-    bg-gradient-to-br from-[#1e1e1f]/80 to-[#2a2a2b]/80
-    backdrop-blur-lg border border-sky-400/30 shadow-xl
-    transition transform hover:scale-[1.03] hover:shadow-sky-400/20 hover:border-sky-400/60"
-          >
-            {/* Glow decorativo */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-sky-400/10 to-green-400/10 blur-2xl opacity-40 pointer-events-none"></div>
-
-            <div className="relative space-y-6">
-              {/* Email */}
-              <div className="flex items-center gap-4 group">
-                <Mail className="w-7 h-7 text-sky-400 group-hover:scale-110 transition-transform" />
-                <a
-                  href={`mailto:${t("contact.email-content")}`}
-                  className="text-lg font-medium text-white transition 
-          hover:bg-gradient-to-r hover:from-sky-400 hover:to-green-400 
-          hover:bg-clip-text hover:text-transparent"
-                >
-                  {t("contact.email-content")}
-                </a>
-              </div>
-
-              {/* Teléfono */}
-              <div className="flex items-center gap-4 group">
-                <Phone className="w-7 h-7 text-green-400 group-hover:scale-110 transition-transform" />
-                <a
-                  href={`tel:${t("contact.phone-content")}`}
-                  className="text-lg font-medium text-white transition 
-          hover:bg-gradient-to-r hover:from-green-400 hover:to-sky-400 
-          hover:bg-clip-text hover:text-transparent"
-                >
-                  {t("contact.phone-content")}
-                </a>
-              </div>
-
-              {/* Ubicación */}
-              <div className="flex items-center gap-4 group">
-                <MapPin className="w-7 h-7 text-sky-400 group-hover:scale-110 transition-transform" />
-                <a
-                  href="https://www.google.com/maps?q=Toluca,+México"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-lg font-medium text-white transition 
-          hover:bg-gradient-to-r hover:from-sky-400 hover:to-green-400 
-          hover:bg-clip-text hover:text-transparent"
-                >
-                  {t("contact.location-content")}
-                </a>
-              </div>
-
-              {/* WhatsApp */}
-              <div className="flex items-center gap-4 group mt-4">
-                <Send className="w-7 h-7 text-green-400 group-hover:scale-110 transition-transform" />
-                <a
-                  href={`https://wa.me/${t("contact.phone-link")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-lg font-medium text-white transition 
-          hover:bg-gradient-to-r hover:from-green-400 hover:to-sky-400 
-          hover:bg-clip-text hover:text-transparent"
-                >
-                  {t("contact.send-message")}
-                </a>
-              </div>
-            </div>
+          <div className="rounded-2xl p-7 flex flex-col justify-center gap-5 bg-[#171922] border border-white/[0.08]">
+            {CONTACT_LINKS.map(({ icon: Icon, label, href }) => (
+              <a
+                key={label}
+                href={href}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                className="group flex items-center gap-4"
+              >
+                <div className="w-11 h-11 rounded-lg bg-[#1c1f29] flex items-center justify-center shrink-0 group-hover:bg-[#242833] transition-colors duration-200">
+                  <Icon className="w-5 h-5 text-[#9a9aa5] group-hover:text-[#ec4b6a] transition-colors duration-200" strokeWidth={1.75} />
+                </div>
+                <span className="text-[15px] font-medium text-[#f5f5f7] group-hover:text-[#ec4b6a] transition-colors duration-200">
+                  {label}
+                </span>
+              </a>
+            ))}
           </div>
 
-          {/* Mapa con Mapbox */}
-          <div
-            className="relative rounded-2xl overflow-hidden h-full
-            bg-gradient-to-br from-[#1e1e1f]/80 to-[#2a2a2b]/80
-            backdrop-blur-lg border border-green-400/30 shadow-xl
-            transition transform hover:scale-[1.03] hover:shadow-green-400/20 hover:border-green-400/60"
-          >
-            {/* Glow decorativo */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-400/10 to-sky-400/10 blur-2xl opacity-40 pointer-events-none"></div>
-              <iframe
-                title="Mapa Toluca"
-                src="https://www.google.com/maps?q=19.2826,-99.6557&z=13&output=embed"
-                width="100%"
-                height="100%"
-                style={{ border: 0, borderRadius: "12px" }}
-                allowFullScreen
-                loading="lazy"
-              ></iframe>
+          {/* Mapa */}
+          <div className="rounded-2xl overflow-hidden bg-[#171922] border border-white/[0.08] min-h-[280px]">
+            <iframe
+              title="Mapa Toluca"
+              src="https://www.google.com/maps?q=19.2826,-99.6557&z=13&output=embed"
+              width="100%"
+              height="100%"
+              style={{ border: 0, minHeight: "280px" }}
+              allowFullScreen
+              loading="lazy"
+            ></iframe>
           </div>
-
         </div>
       </div>
     </section>

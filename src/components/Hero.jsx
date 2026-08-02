@@ -1,96 +1,128 @@
+import { useEffect, useRef, useState } from "react";
 import { Mail, Phone, MapPin, Linkedin, Github, MessageCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
+const INITIALS = "LR";
+
+const CONTACT_ROWS = [
+  { icon: Mail, titleKey: "hero.email-title", contentKey: "hero.email-content" },
+  { icon: Phone, titleKey: "hero.phone-title", contentKey: "hero.phone-content-2" },
+  { icon: MapPin, titleKey: "hero.location-title", contentKey: "hero.location-content" },
+];
+
+const SOCIAL_LINKS = [
+  { icon: Linkedin, href: "https://linkedin.com/in/luisrocharonq", label: "LinkedIn de Luis Rocha" },
+  { icon: Github, href: "https://github.com/luisrocha021231", label: "GitHub de Luis Rocha" },
+  { icon: MessageCircle, href: "https://wa.me/527122109471", label: "WhatsApp de Luis Rocha" },
+];
+
+function AvatarPanel({ size }) {
+  const clamped = size ? Math.min(Math.max(size, 200), 320) : null;
+  const desktopStyle = clamped ? { "--avatar-size": `${clamped}px` } : undefined;
+
+  return (
+    <div
+      className="relative shrink-0 bg-[#1c1f29] flex items-center justify-center w-full h-72 sm:h-[var(--avatar-size)] sm:w-[var(--avatar-size)] overflow-hidden"
+      style={desktopStyle}
+    >
+      {/* Placeholder de iniciales */}
+      <div className="w-24 h-24 rounded-full bg-[#2a2e3a] flex items-center justify-center">
+        <span
+          className="text-3xl font-bold text-[#f5f5f7]"
+          style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+        >
+          {INITIALS}
+        </span>
+      </div>
+
+      {/* 
+      <img
+        src="/Avatar.webp"
+        alt="Foto de perfil"
+        className="absolute inset-0 w-full h-full object-cover object-top"
+      /> */}
+
+      <span className="absolute bottom-4 right-4 flex h-5 w-5 z-10">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#37f712] opacity-75" />
+        <span className="relative inline-flex rounded-full h-5 w-5 bg-[#37f712] border-2 border-[#1c1f29]" />
+      </span>
+    </div>
+  );
+}
+
 export default function Hero() {
   const { t } = useTranslation();
+  const infoRef = useRef(null);
+  const [avatarSize, setAvatarSize] = useState(null);
+
+  useEffect(() => {
+    const el = infoRef.current;
+    if (!el) return;
+
+    const update = () => {
+      const next = el.offsetHeight;
+      setAvatarSize((prev) => (prev !== null && Math.abs(prev - next) < 1 ? prev : next));
+    };
+    update();
+
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    window.addEventListener("resize", update);
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", update);
+    };
+  }, []);
 
   return (
     <section
       id="inicio"
-      className="relative h-screen flex flex-col justify-center items-center bg-[#121212] text-white px-4"
+      className="min-h-screen flex flex-col justify-center items-center bg-[#12141c] text-[#f5f5f7] px-4 pt-20"
+      style={{ fontFamily: "'Space Grotesk', sans-serif" }}
     >
+      <div className="w-full max-w-3xl rounded-2xl overflow-hidden bg-[#171922] border border-white/[0.08] shadow-[0_24px_60px_rgba(0,0,0,0.4)] flex flex-col">
+        <div className="flex flex-col sm:flex-row">
+          <AvatarPanel size={avatarSize} />
 
-      {/* Card central con glow */}
-      <div
-        className="relative w-full max-w-md rounded-2xl p-8 text-center
-          bg-gradient-to-br from-[#1e1e1f]/80 to-[#2a2a2b]/80
-          backdrop-blur-lg border border-sky-400/40 shadow-xl
-          transition hover:border-sky-400/80 hover:shadow-sky-400/30"
-      >
-        {/* Glow decorativo */}
-        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-sky-400/10 to-green-400/10 blur-2xl opacity-40 pointer-events-none"></div>
+          {/* Columna info */}
+          <div ref={infoRef} className="flex-1 min-w-0 sm:min-w-[320px] px-8 py-9 flex flex-col justify-center">
+            <h1 className="text-[26px] leading-tight font-bold break-words">{t("hero.name")}</h1>
+            <p className="mt-2 text-[14px] font-semibold text-[#ec4b6a]">{t("hero.desc")}</p>
 
-        {/* Avatar */}
-        <div className="relative w-32 h-32 mx-auto mb-4 z-10">
-            <img
-              src="/Avatar.webp"
-              alt="Perfil"
-              className="rounded-2xl shadow-lg"
-              width={200}
-              height={200}
-              fetchPriority="high"
-              decoding="async"
-            />
-            <span className="absolute bottom-2 right-2 flex h-4 w-4">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#37f712] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-4 w-4 bg-[#37f712]"></span>
-            </span>
-          </div>
-          
-        {/* Nombre y rol */}
-        <h1 className="text-2xl font-bold relative z-10">{t("hero.name")}</h1>
-        <p className="bg-gradient-to-r from-sky-400 to-green-400 bg-clip-text text-transparent text-sm px-3 py-1 rounded-lg inline-block mt-2 relative z-10">
-          {t("hero.desc")}
-        </p>
-
-        <hr className="my-6 border-gray-700 relative z-10" />
-
-        {/* Info de contacto */}
-        <div className="space-y-4 text-left relative z-10">
-          <div className="flex items-center space-x-3">
-            <div className="bg-gray-700 p-2 rounded-lg">
-              <Mail className="w-5 h-5 text-green-400" />
-            </div>
-            <div>
-              <p className="text-xs text-gray-400">{t("hero.email-title")}</p>
-              <p className="text-sm">{t("hero.email-content")}</p>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-3">
-            <div className="bg-gray-700 p-2 rounded-lg">
-              <Phone className="w-5 h-5 text-green-400" />
-            </div>
-            <div>
-              <p className="text-xs text-gray-400">{t("hero.phone-title")}</p>
-              <p className="text-sm">{t("hero.phone-content-2")}</p>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-3">
-            <div className="bg-gray-700 p-2 rounded-lg">
-              <MapPin className="w-5 h-5 text-green-400" />
-            </div>
-            <div>
-              <p className="text-xs text-gray-400">{t("hero.location-title")}</p>
-              <p className="text-sm">{t("hero.location-content")}</p>
+            <div className="mt-7 space-y-5">
+              {CONTACT_ROWS.map(({ icon: Icon, titleKey, contentKey }) => (
+                <div
+                  key={titleKey}
+                  className="flex items-center gap-4 pb-5 border-b border-white/[0.06] last:border-0 last:pb-0"
+                >
+                  <div className="w-9 h-9 rounded-lg bg-[#1c1f29] flex items-center justify-center shrink-0">
+                    <Icon className="w-[17px] h-[17px] text-[#9a9aa5]" strokeWidth={1.75} />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-[10px] tracking-wide text-[#9a9aa5] uppercase">{t(titleKey)}</p>
+                    <p className="text-[15px] truncate">{t(contentKey)}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
-        <hr className="my-6 border-gray-700 relative z-10" />
-
-        {/* Redes sociales */}
-        <div className="flex justify-center space-x-4 text-green-400 relative z-10">
-          <a href="https://linkedin.com/in/luisrocharonq" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn of Luis Rocha">
-            <Linkedin className="w-6 h-6 hover:text-sky-400" />
-          </a>
-          <a href="https://github.com/luisrocha021231" target="_blank" rel="noopener noreferrer" aria-label="GitHub of Luis Rocha">
-            <Github className="w-6 h-6 hover:text-sky-400" />
-          </a>
-          <a href="https://wa.me/527122109471" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp of Luis Rocha">
-            <MessageCircle className="w-6 h-6 hover:text-sky-400" />
-          </a>
+        {/* Footer: */}
+        <div className="flex justify-center gap-3 py-5 border-t border-white/[0.06]">
+          {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              className="w-10 h-10 rounded-full bg-[#1c1f29] flex items-center justify-center text-[#9a9aa5] hover:text-[#ec4b6a] transition-colors duration-200"
+            >
+              <Icon className="w-[17px] h-[17px]" strokeWidth={1.75} />
+            </a>
+          ))}
         </div>
       </div>
     </section>

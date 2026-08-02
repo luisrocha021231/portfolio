@@ -1,6 +1,6 @@
 {
   "hero": {
-    "name": "Luis Rocha",
+    "name": "Luis Angel Rocha Ronquillo",
     "desc": "Backend Developer Jr.",
     "email-title": "Email",
     "phone-title": "Phone",
@@ -10,7 +10,7 @@
     "location-content": "Toluca, Mexico"
   },
   "navbar": {
-    "title": "Personal portfolio",
+    "title": "Luis A. Rocha Portfolio",
     "home": "Home",
     "about": "About",
     "favorites": "Interests",
@@ -133,7 +133,11 @@
     "sec": "and",
     "final": "Luis Angel Rocha Ronquillo",
     "repo": "Portfolio Repository",
-    "stats": "and monitored with"
+    "stats": "and monitored with",
+    "lighthouse": "Performance",
+    "a11y": "Accessibility",
+    "best-practices": "Best Practices",
+    "seo": "SEO"
   },
   "mapbox" : {
     "map-overlay-desktop": "Hold Ctrl or ⌘ to move the map",

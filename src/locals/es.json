@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "Hola, soy",
-    "name": "Luis Rocha",
+    "name": "Luis Angel Rocha Ronquillo",
     "desc": "Desarrollador Backend Jr.",
     "email-title": "Correo electrónico",
     "phone-title": "Teléfono",
@@ -12,7 +12,7 @@
     "contact": "Contáctame"
   },
   "navbar": {
-    "title": "Portafolio personal",
+    "title": "Portafolio de Luis A. Rocha",
     "home": "Inicio",
     "about": "Sobre mí",
     "favorites": "Intereses",
@@ -135,7 +135,11 @@
     "sec": "y",
     "final": "Luis Angel Rocha Ronquillo",
     "repo": "Repositorio del Portafolio",
-    "stats": "y monitoreado con"
+    "stats": "y monitoreado con",
+    "lighthouse": "Rendimiento",
+    "a11y": "Accesibilidad",
+    "best-practices": "Buenas prácticas",
+    "seo": "SEO"
   },
   "mapbox" : {
     "map-overlay-desktop": "Mantén presionado Ctrl o ⌘ para mover el mapa",

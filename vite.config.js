@@ -1,20 +1,30 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import { readFileSync } from 'node:fs'
 
-// https://vite.dev/config/
+const pkg = JSON.parse(readFileSync('./package.json', 'utf-8'))
+
 export default defineConfig({
   plugins: [react(), tailwindcss(),],
+  define: {
+    __APP_VERSION__: JSON.stringify(pkg.version),
+  },
   build: {
-    cssCodeSplit: false, // desactiva el code splitting de CSS
-    cssMinify: true, // habilita la minificación de CSS
+    cssCodeSplit: false, 
+    cssMinify: true, 
     rollupOptions: {
       output: {
-        manualChunks: undefined // reduce las solicitudes criticas
+        manualChunks: undefined 
       },
     },
   },
   esbuild: {
-    drop: ['console', 'debugger'] // elimina console.log y debugger en producción
+    drop: ['console', 'debugger']
+  },
+  server: {
+    allowedHosts: [
+      '.ngrok-free.app'
+    ]
   }
 })
