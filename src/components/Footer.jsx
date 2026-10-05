@@ -5,7 +5,7 @@ import { Github, Linkedin, MessageCircle, Instagram } from "lucide-react";
 const SOCIAL_LINKS = [
   { icon: Github, href: "https://github.com/luisrocha021231", label: "GitHub" },
   { icon: Linkedin, href: "https://linkedin.com/in/luisrocharonq", label: "LinkedIn" },
-  { icon: MessageCircle, href: "https://wa.me/527122109471", label: "WhatsApp" },
+  { icon: MessageCircle, href: "https://wa.me/525664073124", label: "WhatsApp" },
   { icon: Instagram, href: "https://www.instagram.com/luisrocharo", label: "Instagram" },
 ];
 

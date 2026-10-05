@@ -13,7 +13,7 @@ const CONTACT_ROWS = [
 const SOCIAL_LINKS = [
   { icon: Linkedin, href: "https://linkedin.com/in/luisrocharonq", label: "LinkedIn de Luis Rocha" },
   { icon: Github, href: "https://github.com/luisrocha021231", label: "GitHub de Luis Rocha" },
-  { icon: MessageCircle, href: "https://wa.me/527122109471", label: "WhatsApp de Luis Rocha" },
+  { icon: MessageCircle, href: "https://wa.me/525664073124", label: "WhatsApp de Luis Rocha" },
 ];
 
 function AvatarPanel({ size }) {
@@ -35,12 +35,12 @@ function AvatarPanel({ size }) {
         </span>
       </div>
 
-      {/* 
+      {
       <img
-        src="/Avatar.webp"
+        src="/avatarMio.webp"
         alt="Foto de perfil"
         className="absolute inset-0 w-full h-full object-cover object-top"
-      /> */}
+      />}
 
       <span className="absolute bottom-4 right-4 flex h-5 w-5 z-10">
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#37f712] opacity-75" />
