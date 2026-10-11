@@ -1,4 +1,9 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+
+import "../styles/md3-tokens.css";
+import "../styles/md3-base.css";
+import "../styles/Skills.css";
 
 const SKILLS = [
   { name: "Java", logo: "/logos/java.svg" },
@@ -16,41 +21,51 @@ const SKILLS = [
   { name: "Dokploy", logo: "/logos/dokploy.png" },
 ];
 
+function SkillTile({ name, logo }) {
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <li className="md3-card md3-skill-tile">
+      <span className="md3-skill-tile__logo" aria-hidden="true">
+        {failed ? (
+          name.charAt(0)
+        ) : (
+          <img
+            src={logo}
+            alt=""
+            width={28}
+            height={28}
+            loading="lazy"
+            decoding="async"
+            onError={() => setFailed(true)}
+          />
+        )}
+      </span>
+      <span className="md3-skill-tile__name md3-label-large">{name}</span>
+    </li>
+  );
+}
+
 export default function Skills() {
   const { t } = useTranslation();
 
   return (
     <section
       id="skills"
-      className="min-h-screen flex flex-col justify-center py-24 bg-[#12141c] text-[#f5f5f7] scroll-mt-20"
-      style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+      aria-labelledby="skills-title"
+      className="md3-section flex min-h-[100svh] flex-col justify-center py-16 sm:py-24"
     >
-      <div className="max-w-5xl mx-auto px-6">
-        <h2 className="text-3xl font-bold mb-12 text-[#ec4b6a]">{t("skills.title")}</h2>
+      {/* w-full */}
+      <div className="mx-auto w-full max-w-5xl px-4 sm:px-6">
+        <h2 id="skills-title" className="md3-section__title md3-headline-medium-emphasized">
+          {t("skills.title")}
+        </h2>
 
-        <div className="flex flex-wrap gap-3">
+        <ul className="md3-skill-grid mt-8">
           {SKILLS.map((skill) => (
-            <div
-              key={skill.name}
-              className="group flex items-center gap-2.5 pl-2.5 pr-4 py-2 rounded-full bg-[#171922] border border-white/[0.08] hover:border-[#ec4b6a]/40 transition-colors duration-200"
-            >
-              <div className="w-7 h-7 rounded-full bg-[#e8e6df] flex items-center justify-center shrink-0">
-                <img
-                  src={skill.logo}
-                  alt=""
-                  width={16}
-                  height={16}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-4 h-4 object-contain"
-                />
-              </div>
-              <span className="text-[13px] font-medium text-[#e5e4de] group-hover:text-[#f5f5f7] transition-colors duration-200">
-                {skill.name}
-              </span>
-            </div>
+            <SkillTile key={skill.name} {...skill} />
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

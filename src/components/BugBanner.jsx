@@ -8,14 +8,13 @@ export default function BugBanner() {
   const [index, setIndex] = useState(0);
   const [fade, setFade] = useState(true);
 
-  // Memoriza el array de bugs para que no cambie en cada render
   const bugs = useMemo(() => t("bugs.list", { returnObjects: true }), [t]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setFade(false);
       setTimeout(() => {
-        // Ahora toma un bug aleatorio sin bucle infinito
+
         const randomIndex = Math.floor(Math.random() * bugs.length);
         setIndex(randomIndex);
         setFade(true);
@@ -23,7 +22,7 @@ export default function BugBanner() {
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [bugs.length]); // ahora solo depende del length
+  }, [bugs.length]);
 
   if (!visible) return null;
 

@@ -1,89 +1,105 @@
 import { useTranslation } from "react-i18next";
 import { BookOpen, Briefcase, Download } from "lucide-react";
 
-function TimelineItem({ children }) {
+import "../styles/md3-tokens.css";
+import "../styles/md3-base.css";
+import "../styles/Resume.css";
+
+function PaneHeader({ icon: Icon, children }) {
   return (
-    <div className="relative pl-6 border-l border-white/[0.08]">
-      <span className="absolute -left-[3.5px] top-1.5 w-[7px] h-[7px] rounded-full bg-[#ec4b6a]" />
-      {children}
+    <div className="mb-6 flex items-center gap-3">
+      <span className="md3-resume__icon" aria-hidden="true">
+        <Icon size={20} strokeWidth={1.75} />
+      </span>
+      <h3 className="md3-title-large-emphasized">{children}</h3>
     </div>
+  );
+}
+
+/** Fecha arriba */
+function TimelineItem({ overline, title, supporting, children }) {
+  return (
+    <li className="md3-timeline__item">
+      <p className="md3-timeline__overline md3-label-medium">{overline}</p>
+      <h4 className="md3-title-medium mt-1">{title}</h4>
+      <p className="md3-timeline__supporting md3-body-medium">{supporting}</p>
+      {children}
+    </li>
   );
 }
 
 export default function Resume() {
   const { t, i18n } = useTranslation();
 
-  const education = t("resume.educationItems", { returnObjects: true });
-  const experience = t("resume.experienceItems", { returnObjects: true });
+  const list = (key) => {
+    const value = t(key, { returnObjects: true });
+    return Array.isArray(value) ? value : [];
+  };
+  const education = list("resume.educationItems");
+  const experience = list("resume.experienceItems");
 
+  // "es-MX" debe resolver a "es".
+  const language = (i18n.resolvedLanguage || i18n.language || "").split("-")[0];
   const cvFile =
-    i18n.language === "es"
+    language === "es"
       ? "/files/luisrocharonquillo_cv.pdf"
       : "/files/luisrocharonquillo_cv_en.pdf";
 
   return (
-    <section
-      id="resume"
-      className="py-24 bg-[#12141c] text-[#f5f5f7]"
-      style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-    >
-      <div className="max-w-5xl mx-auto px-6">
-        <h2 className="text-3xl font-bold mb-14 text-[#ec4b6a]">{t("resume.title")}</h2>
+    <section id="resume" aria-labelledby="resume-title" className="md3-section py-16 sm:py-24">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6">
+        {/* Cabecera */}
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <h2 id="resume-title" className="md3-section__title md3-headline-medium-emphasized">
+            {t("resume.title")}
+          </h2>
 
-        {/* Educación */}
-        <div className="mb-14">
-          <div className="flex items-center gap-2.5 mb-7">
-            <BookOpen className="w-5 h-5 text-[#ec4b6a]" strokeWidth={1.75} />
-            <h3 className="text-xl font-bold">{t("resume.education")}</h3>
-          </div>
-          <div className="space-y-6">
-            {education.map((edu, idx) => (
-              <TimelineItem key={idx}>
-                <h4 className="font-bold text-[15px]">{edu.school}</h4>
-                <p className="text-[#9a9aa5] text-[14px] mt-0.5">{edu.degree}</p>
-                <span className="text-[12px] text-[#6f6e78]">{edu.period}</span>
-              </TimelineItem>
-            ))}
-          </div>
-        </div>
-
-        {/* Experiencia */}
-        <div>
-          <div className="flex items-center gap-2.5 mb-7">
-            <Briefcase className="w-5 h-5 text-[#ec4b6a]" strokeWidth={1.75} />
-            <h3 className="text-xl font-bold">{t("resume.experience")}</h3>
-          </div>
-          <div className="space-y-8">
-            {experience.map((exp, idx) => (
-              <TimelineItem key={idx}>
-                <h4 className="font-bold text-[15px]">{exp.role}</h4>
-                <p className="text-[#9a9aa5] text-[14px] mt-0.5">{exp.company}</p>
-                <span className="text-[12px] text-[#6f6e78] block mt-0.5">
-                  {exp.period} • {exp.location}
-                </span>
-                <ul className="mt-3 space-y-1.5">
-                  {exp.tasks.map((task, i) => (
-                    <li key={i} className="text-[#9a9aa5] text-[14px] leading-relaxed flex gap-2">
-                      <span className="text-[#ec4b6a] shrink-0">–</span>
-                      {task}
-                    </li>
-                  ))}
-                </ul>
-              </TimelineItem>
-            ))}
-          </div>
-        </div>
-
-        {/* Botón de descarga */}
-        <div className="mt-14 flex justify-center">
           <a
             href={cvFile}
             download
-            className="flex items-center gap-2.5 bg-[#ec4b6a]/10 hover:bg-[#ec4b6a]/20 text-[#ec4b6a] px-6 py-3 rounded-lg text-[14px] font-semibold transition-colors duration-200"
+            className="md3-button md3-button--icon md3-button--filled md3-state"
           >
-            <Download className="w-[18px] h-[18px]" strokeWidth={1.75} />
+            <Download size={18} strokeWidth={1.75} aria-hidden="true" />
             {t("resume.download")}
           </a>
+        </div>
+
+        <div className="md3-resume__panes mt-8">
+          {/* Educación */}
+          <div className="md3-card md3-resume__pane--supporting p-6">
+            <PaneHeader icon={BookOpen}>{t("resume.education")}</PaneHeader>
+            <ol className="md3-timeline">
+              {education.map((edu, idx) => (
+                <TimelineItem
+                  key={idx}
+                  overline={edu.period}
+                  title={edu.school}
+                  supporting={edu.degree}
+                />
+              ))}
+            </ol>
+          </div>
+
+          {/* Experiencia */}
+          <div className="md3-card p-6">
+            <PaneHeader icon={Briefcase}>{t("resume.experience")}</PaneHeader>
+            <ol className="md3-timeline">
+              {experience.map((exp, idx) => (
+                <TimelineItem
+                  key={idx}
+                  overline={`${exp.period} • ${exp.location}`}
+                  title={exp.role}
+                  supporting={exp.company}
+                >
+                  <ul className="md3-timeline__tasks md3-body-medium">
+                    {(exp.tasks ?? []).map((task, i) => (
+                      <li key={i}>{task}</li>
+                    ))}
+                  </ul>
+                </TimelineItem>
+              ))}
+            </ol>
+          </div>
         </div>
       </div>
     </section>

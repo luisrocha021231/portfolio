@@ -1,0 +1,30 @@
+/* Proyecto */
+.md3-project {
+  overflow: hidden;
+}
+
+@media (max-width: 39.99rem) {
+  .md3-project__actions > * {
+    flex: 1 1 auto;
+  }
+}
+
+.md3-projects__more {
+  min-height: 10rem;
+  padding: 2rem 1.5rem;
+  color: var(--md-sys-color-on-surface-variant);
+  text-align: center;
+}
+.md3-projects__more-icon {
+  width: 3rem;
+  height: 3rem;
+  display: grid;
+  place-items: center;
+  border-radius: var(--md-sys-shape-corner-full);
+  background: var(--md-sys-color-surface-container-highest);
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.md3-projects__more--wide {
+  grid-column: 1 / -1;
+}

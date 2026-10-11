@@ -1,17 +1,23 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useId } from "react";
 import { useTranslation } from "react-i18next";
-import { Menu, X, Check, Languages, ChevronDown } from "lucide-react";
+import {Menu, X, Check, Languages, ChevronDown, Home, User, Layers, FolderOpen, FileText, Mail,} from "lucide-react";
+
+import "../styles/md3-tokens.css";
+import "../styles/md3-base.css";
+import "../styles/Navbar.css";
 
 const INITIALS = "LR";
 
 const NAV_ITEMS = [
-  { key: "navbar.home", href: "#inicio" },
-  { key: "navbar.about", href: "#sobremi" },
-  { key: "navbar.skills", href: "#skills" },
-  { key: "navbar.projects", href: "#proyectos" },
-  { key: "navbar.resume", href: "#resume" },
-  { key: "navbar.contact", href: "#contacto" },
+  { key: "navbar.home", href: "#inicio", icon: Home },
+  { key: "navbar.about", href: "#sobremi", icon: User },
+  { key: "navbar.skills", href: "#skills", icon: Layers },
+  { key: "navbar.projects", href: "#proyectos", icon: FolderOpen },
+  { key: "navbar.resume", href: "#resume", icon: FileText },
+  { key: "navbar.contact", href: "#contacto", icon: Mail },
 ];
+
+const NAV_HREFS = NAV_ITEMS.map((item) => item.href);
 
 const LANGUAGES = [
   { code: "es", label: "Español" },
@@ -20,111 +26,219 @@ const LANGUAGES = [
   // { code: "fr", label: "Français" },
 ];
 
-function AvatarCircle() {
+const DESKTOP_QUERY = "(min-width: 1024px)";
+
+/** Sección activa */
+function useActiveSection(hrefs, fallback) {
+  const [active, setActive] = useState(fallback);
+
+  useEffect(() => {
+    const syncHash = () => {
+      const { hash } = window.location;
+      if (hrefs.includes(hash)) setActive(hash);
+    };
+    syncHash();
+    window.addEventListener("hashchange", syncHash);
+
+    const sections = hrefs
+      .map((href) => document.getElementById(href.slice(1)))
+      .filter(Boolean);
+
+    const compute = () => {
+      if (!sections.length) return;
+      const atBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      const line = Math.min(window.innerHeight * 0.45, 200);
+      let current = sections[0];
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top <= line) current = section;
+      }
+      if (atBottom) current = sections[sections.length - 1];
+      setActive(`#${current.id}`);
+    };
+
+    let frame = 0;
+    const onScroll = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        compute();
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+
+    return () => {
+      window.removeEventListener("hashchange", syncHash);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      cancelAnimationFrame(frame);
+    };
+  }, [hrefs]);
+
+  return active;
+}
+
+function useScrolled() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 0);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return scrolled;
+}
+
+function Brand({ title }) {
   return (
-    <div className="w-9 h-9 rounded-full bg-[#e8e6df] flex items-center justify-center shrink-0">
-      <span
-        className="text-[13px] font-bold text-[#12141c]"
-        style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-      >
+    <a
+      href="#inicio"
+      className="md3-brand md3-focus flex min-w-0 items-center gap-3 select-none"
+    >
+      <span className="md3-avatar md3-label-large flex shrink-0 items-center justify-center">
         {INITIALS}
+        {/* <img src="/image.jpg" alt="" className="h-full w-full rounded-full object-cover" /> */}
       </span>
-      {/*
-      <img src="/image.jpg" alt="" className="w-full h-full rounded-full object-cover" /> */}
-    </div>
+      <span className="md3-title-medium truncate">{title}</span>
+      {/* <span className="md3-badge flex shrink-0 items-center justify-center" aria-hidden="true">
+        <Check size={11} strokeWidth={3} />
+      </span> */}
+    </a>
   );
 }
 
-function LanguageSelector({ i18n, variant = "desktop" }) {
+/** Menú */
+function LanguageMenu({ i18n, label }) {
   const [open, setOpen] = useState(false);
-  const ref = useRef(null);
+  const rootRef = useRef(null);
+  const triggerRef = useRef(null);
+  const itemRefs = useRef([]);
+  const menuId = useId();
 
-  const current = LANGUAGES.find((l) => l.code === i18n.language) || LANGUAGES[0];
+  // "es-MX" debe resolver "es".
+  const activeCode = (i18n.resolvedLanguage || i18n.language || "").split("-")[0];
+  const currentIndex = Math.max(
+    0,
+    LANGUAGES.findIndex((lng) => lng.code === activeCode)
+  );
+  const current = LANGUAGES[currentIndex];
 
   useEffect(() => {
-    const onClickOutside = (e) => {
-      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    if (!open) return undefined;
+
+    itemRefs.current[currentIndex]?.focus();
+
+    const onPointerDown = (e) => {
+      if (!rootRef.current?.contains(e.target)) setOpen(false);
     };
-    const onEscape = (e) => e.key === "Escape" && setOpen(false);
-    document.addEventListener("mousedown", onClickOutside);
-    document.addEventListener("keydown", onEscape);
-    return () => {
-      document.removeEventListener("mousedown", onClickOutside);
-      document.removeEventListener("keydown", onEscape);
-    };
-  }, []);
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, [open, currentIndex]);
+
+  const close = ({ restoreFocus = true } = {}) => {
+    setOpen(false);
+    if (restoreFocus) triggerRef.current?.focus();
+  };
 
   const select = (code) => {
     i18n.changeLanguage(code);
-    setOpen(false);
+    close();
   };
 
-  if (variant === "mobile") {
-    return (
-      <div className="flex flex-wrap gap-2">
-        {LANGUAGES.map((lng) => (
-          <button
-            key={lng.code}
-            onClick={() => select(lng.code)}
-            className={`px-3 py-1.5 rounded-full text-[13px] transition-colors duration-200 ${
-              lng.code === i18n.language
-                ? "bg-[#ec4b6a] text-[#12141c] font-bold"
-                : "bg-[#1c1f29] text-[#9a9aa5] hover:text-[#f5f5f7]"
-            }`}
-            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-          >
-            {lng.label}
-          </button>
-        ))}
-      </div>
-    );
-  }
+  const onTriggerKeyDown = (e) => {
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault();
+      setOpen(true);
+    }
+  };
+
+  const onMenuKeyDown = (e) => {
+    const items = itemRefs.current.filter(Boolean);
+    const index = items.indexOf(document.activeElement);
+    const focusAt = (i) => items[(i + items.length) % items.length]?.focus();
+
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault();
+        focusAt(index + 1);
+        break;
+      case "ArrowUp":
+        e.preventDefault();
+        focusAt(index - 1);
+        break;
+      case "Home":
+        e.preventDefault();
+        focusAt(0);
+        break;
+      case "End":
+        e.preventDefault();
+        focusAt(items.length - 1);
+        break;
+      case "Escape":
+        e.preventDefault();
+        close();
+        break;
+      case "Tab":
+        close({ restoreFocus: false });
+        break;
+      default:
+    }
+  };
 
   return (
-    <div className="relative" ref={ref}>
+    <div className="relative shrink-0" ref={rootRef}>
       <button
-        onClick={() => setOpen((v) => !v)}
-        aria-haspopup="listbox"
+        ref={triggerRef}
+        type="button"
+        className="md3-outlined-button md3-state md3-label-large"
+        aria-haspopup="menu"
         aria-expanded={open}
-        className="h-10 pl-3 pr-2.5 rounded-full bg-[#1c1f29] hover:bg-[#242833] flex items-center gap-1.5 transition-colors duration-200"
+        aria-controls={menuId}
+        aria-label={`${label}: ${current.label}`}
+        onClick={() => setOpen((v) => !v)}
+        onKeyDown={onTriggerKeyDown}
       >
-        <Languages size={16} strokeWidth={1.75} className="text-[#f5f5f7]" />
-        <span
-          className="text-[12px] font-bold text-[#f5f5f7]"
-          style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-        >
-          {current.code.toUpperCase()}
-        </span>
+        <Languages size={18} strokeWidth={1.75} className="md3-outlined-button__icon" aria-hidden="true" />
+        <span aria-hidden="true">{current.code.toUpperCase()}</span>
         <ChevronDown
-          size={14}
-          strokeWidth={2}
-          className={`text-[#9a9aa5] transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          size={18}
+          strokeWidth={1.75}
+          className="md3-outlined-button__icon md3-outlined-button__chevron"
+          aria-hidden="true"
         />
       </button>
 
       <div
-        role="listbox"
-        className={`absolute right-0 top-full mt-2 min-w-[160px] rounded-xl bg-[#1c1f29] border border-white/[0.08] py-1.5 shadow-xl origin-top-right transition-all duration-150 ${
-          open ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"
-        }`}
+        id={menuId}
+        role="menu"
+        aria-label={label}
+        data-open={open}
+        className="md3-menu"
+        onKeyDown={onMenuKeyDown}
       >
-        {LANGUAGES.map((lng) => {
-          const active = lng.code === i18n.language;
+        {LANGUAGES.map((lng, i) => {
+          const checked = lng.code === current.code;
           return (
             <button
               key={lng.code}
-              role="option"
-              aria-selected={active}
+              ref={(el) => {
+                itemRefs.current[i] = el;
+              }}
+              type="button"
+              role="menuitemradio"
+              aria-checked={checked}
+              tabIndex={-1}
+              lang={lng.code}
+              className="md3-menu-item md3-state md3-label-large"
               onClick={() => select(lng.code)}
-              className="w-full flex items-center justify-between gap-3 px-3.5 py-2 hover:bg-white/[0.05] transition-colors duration-150"
             >
-              <span
-                className={`text-[13px] ${active ? "text-[#f5f5f7]" : "text-[#9a9aa5]"}`}
-                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-              >
-                {lng.label}
+              <span className="md3-menu-item__check" aria-hidden="true">
+                {checked && <Check size={20} strokeWidth={2} />}
               </span>
-              {active && <Check size={14} strokeWidth={2.5} className="text-[#ec4b6a]" />}
+              {lng.label}
             </button>
           );
         })}
@@ -133,107 +247,133 @@ function LanguageSelector({ i18n, variant = "desktop" }) {
   );
 }
 
+/** Navigation drawer modal */
+function NavigationDrawer({ open, onClose, title, activeHash, t }) {
+  const dialogRef = useRef(null);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    if (open && !dialog.open) dialog.showModal();
+    if (!open && dialog.open) dialog.close();
+  }, [open]);
+
+  return (
+    <dialog
+      ref={dialogRef}
+      className="md3-drawer"
+      aria-label={t("navbar.menu", "Menú de navegación")}
+      onClose={onClose}
+      onClick={(e) => e.target === e.currentTarget && onClose()}
+    >
+      <div className="md3-drawer__sheet">
+        <div className="md3-drawer__header flex items-center justify-between gap-2">
+          <span className="md3-title-small truncate">{title}</span>
+          <button
+            type="button"
+            className="md3-icon-button md3-state shrink-0"
+            aria-label={t("navbar.closeMenu", "Cerrar menú")}
+            onClick={onClose}
+          >
+            <X size={24} strokeWidth={1.75} aria-hidden="true" />
+          </button>
+        </div>
+
+        <nav aria-label={t("navbar.primary", "Principal")}>
+          <ul className="flex flex-col">
+            {NAV_ITEMS.map(({ key, href, icon: Icon }) => (
+              <li key={key}>
+                <a
+                  href={href}
+                  aria-current={activeHash === href ? "location" : undefined}
+                  className="md3-drawer-item md3-state md3-label-large"
+                  onClick={onClose}
+                >
+                  <Icon size={24} strokeWidth={1.75} aria-hidden="true" />
+                  {t(key)}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </dialog>
+  );
+}
+
 export default function Navbar() {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
-  const [activeHash, setActiveHash] = useState("#inicio");
+  const activeHash = useActiveSection(NAV_HREFS, "#inicio");
+  const scrolled = useScrolled();
+  const title = t("navbar.title");
 
   useEffect(() => {
-    const syncHash = () => {
-      setActiveHash(window.location.hash || "#inicio");
-      setIsOpen(false);
+    const close = () => setIsOpen(false);
+    const desktop = window.matchMedia(DESKTOP_QUERY);
+    window.addEventListener("hashchange", close);
+    desktop.addEventListener("change", close);
+    return () => {
+      window.removeEventListener("hashchange", close);
+      desktop.removeEventListener("change", close);
     };
-    syncHash();
-    window.addEventListener("hashchange", syncHash);
-    return () => window.removeEventListener("hashchange", syncHash);
   }, []);
 
   return (
-    <nav className="fixed inset-x-0 top-0 z-50 bg-[#12141c] border-b border-white/[0.06]">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="h-20 flex items-center justify-between">
-          {/* Avatar + nombre */}
-          <a href="#inicio" className="flex items-center gap-3 select-none">
-            <AvatarCircle />
-            <span
-              className="text-[15px] font-bold text-[#f5f5f7]"
-              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-            >
-              {t("navbar.title")}
-            </span>
-            <span className="w-4 h-4 rounded-full bg-[#ec4b6a] flex items-center justify-center">
-              <Check size={11} strokeWidth={3} className="text-[#12141c]" />
-            </span>
-          </a>
-
-          {/* Desktop nav */}
-          <div className="hidden lg:flex items-center gap-8">
-            <ul className="flex items-center gap-7">
-              {NAV_ITEMS.map((item) => {
-                const active = activeHash === item.href;
-                return (
-                  <li key={item.key}>
-                    <a href={item.href} style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                      <span
-                        className={`text-[14px] pb-1 border-b-2 ${
-                          active
-                            ? "text-[#f5f5f7] border-[#ec4b6a]"
-                            : "text-[#9a9aa5] border-transparent hover:text-[#f5f5f7]"
-                        } transition-colors duration-200`}
-                      >
-                        {t(item.key)}
-                      </span>
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-
-            <LanguageSelector i18n={i18n} variant="desktop" />
-          </div>
-
-          {/* Botón menú móvil */}
+    <header
+      className="md3-top-app-bar fixed inset-x-0 top-0 z-50"
+      data-scrolled={scrolled}
+    >
+      <div className="md3-top-app-bar__row mx-auto flex max-w-7xl items-center gap-1 pl-1 pr-4 lg:gap-6 lg:px-10">
+        {/* Icono de navegación */}
+        <div className="shrink-0 lg:hidden">
           <button
-            className="lg:hidden text-[#f5f5f7] p-2 -mr-2"
-            aria-label="Toggle Menu"
+            type="button"
+            className="md3-icon-button md3-state"
+            aria-label={t("navbar.openMenu", "Abrir menú")}
+            aria-haspopup="dialog"
             aria-expanded={isOpen}
-            onClick={() => setIsOpen((v) => !v)}
+            onClick={() => setIsOpen(true)}
           >
-            {isOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}
+            <Menu size={24} strokeWidth={1.75} aria-hidden="true" />
           </button>
         </div>
-      </div>
 
-      {/* Panel móvil */}
-      <div
-        className={`lg:hidden absolute inset-x-0 top-20 origin-top transition-all duration-200
-          ${isOpen ? "opacity-100 scale-y-100" : "pointer-events-none opacity-0 scale-y-95"}`}
-      >
-        <div className="bg-[#12141c] border-b border-white/[0.06]">
-          <ul className="flex flex-col px-6 py-4">
-            {NAV_ITEMS.map((item, i) => {
-              const active = activeHash === item.href;
-              return (
-                <li key={item.key} className={i !== 0 ? "border-t border-white/[0.06]" : ""}>
-                  <a
-                    href={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className="block py-4"
-                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-                  >
-                    <span className={`text-[15px] ${active ? "text-[#f5f5f7]" : "text-[#9a9aa5]"}`}>
-                      {t(item.key)}
-                    </span>
-                  </a>
-                </li>
-              );
-            })}
-            <li className="border-t border-white/[0.06] pt-4">
-              <LanguageSelector i18n={i18n} variant="mobile" />
-            </li>
+        <Brand title={title} />
+
+        {/* Destinos */}
+        <nav
+          aria-label={t("navbar.primary", "Principal")}
+          className="ml-auto hidden lg:block"
+        >
+          <ul className="flex items-center gap-1">
+            {NAV_ITEMS.map(({ key, href }) => (
+              <li key={key}>
+                <a
+                  href={href}
+                  aria-current={activeHash === href ? "location" : undefined}
+                  className="md3-nav-item md3-state md3-label-large"
+                >
+                  {t(key)}
+                </a>
+              </li>
+            ))}
           </ul>
+        </nav>
+
+        {/* Acciones */}
+        <div className="ml-auto flex items-center lg:ml-0">
+          <LanguageMenu i18n={i18n} label={t("navbar.language", "Idioma")} />
         </div>
       </div>
-    </nav>
+
+      <NavigationDrawer
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        title={title}
+        activeHash={activeHash}
+        t={t}
+      />
+    </header>
   );
 }

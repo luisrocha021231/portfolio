@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Github, Linkedin, MessageCircle, Instagram } from "lucide-react";
 
+import "../styles/md3-tokens.css";
+import "../styles/md3-base.css";
+import "../styles/Footer.css";
+
 const SOCIAL_LINKS = [
   { icon: Github, href: "https://github.com/luisrocha021231", label: "GitHub" },
   { icon: Linkedin, href: "https://linkedin.com/in/luisrocharonq", label: "LinkedIn" },
@@ -9,37 +13,60 @@ const SOCIAL_LINKS = [
   { icon: Instagram, href: "https://www.instagram.com/luisrocharo", label: "Instagram" },
 ];
 
+const REPO = "luisrocha021231/portfolio";
+
 const APP_VERSION = `v${__APP_VERSION__}`;
 
 const FALLBACK_SCORES = { performance: 98, accessibility: 100, bestPractices: 100, seo: 100 };
 
-function ScoreBadge({ label, value }) {
+/** Puntuación */
+function ScoreRing({ label, value }) {
+  const score = Math.min(100, Math.max(0, Number(value) || 0));
+
   return (
-    <div className="flex flex-col items-center gap-1.5" title={label}>
-      <div className="w-11 h-11 rounded-full border border-[#ec4b6a]/40 flex items-center justify-center">
-        <span className="text-[12px] font-bold text-[#ec4b6a]">{value}</span>
-      </div>
-      <span className="text-[10px] text-[#6f6e78] whitespace-nowrap">{label}</span>
-    </div>
+    <li className="md3-score">
+      <span className="md3-score__ring">
+        {/* pathLength=100 */}
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <circle className="md3-score__track" cx="24" cy="24" r="20" />
+          {score > 0 && (
+            <circle
+              className="md3-score__indicator"
+              cx="24"
+              cy="24"
+              r="20"
+              pathLength="100"
+              strokeDasharray="100"
+              strokeDashoffset={100 - score}
+            />
+          )}
+        </svg>
+        <span className="md3-score__value md3-label-large">{score}</span>
+      </span>
+      <span className="md3-label-small">{label}</span>
+    </li>
   );
 }
 
 export default function Footer() {
   const { t } = useTranslation();
-  const repo = "luisrocha021231/portfolio";
   const year = new Date().getFullYear();
 
   const [scores, setScores] = useState(FALLBACK_SCORES);
 
   useEffect(() => {
-    fetch("/performance.json")
+    const controller = new AbortController();
+
+    fetch("/performance.json", { signal: controller.signal })
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
-        if (data?.scores) setScores(data.scores);
+        if (data?.scores) setScores({ ...FALLBACK_SCORES, ...data.scores });
       })
       .catch(() => {
-        
+        // Sin archivo se quedan los valores por defecto.
       });
+
+    return () => controller.abort();
   }, []);
 
   const PERFORMANCE_SCORES = [
@@ -50,55 +77,58 @@ export default function Footer() {
   ];
 
   return (
-    <footer
-      className="bg-[#12141c] border-t border-white/[0.08] py-12 px-6"
-      style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-    >
-      <div
-        className="max-w-5xl mx-auto flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8"
-        style={{ maxWidth: "1024px" }}
-      >
-        {/* Izquierda: copyright + social */}
-        <div className="flex flex-wrap items-center gap-x-10 gap-y-6">
-          <div className="flex items-center gap-2">
-            <p className="text-[13px] text-[#9a9aa5]">© {year} Luis Angel Rocha Ronquillo</p>
-            <span className="text-[#3d3d3a]">•</span>
-            <span className="text-[12px] text-[#6f6e78]">{APP_VERSION}</span>
-          </div>
-
-          <div className="flex items-center gap-3">
-            {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="text-[#9a9aa5] hover:text-[#ec4b6a] transition-colors duration-200"
-              >
-                <Icon className="w-[18px] h-[18px]" strokeWidth={1.75} />
-              </a>
+    <footer className="md3-footer">
+      <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10">
+        {/* Sobre este sitio */}
+        <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-6">
+          <ul
+            className="md3-scores"
+            aria-label={t("footer.scores-label", "Puntuaciones de Lighthouse")}
+          >
+            {PERFORMANCE_SCORES.map((score) => (
+              <ScoreRing key={score.label} {...score} />
             ))}
-          </div>
-        </div>
-
-        {/* Derecha: métricas + repo */}
-        <div className="flex items-center gap-5">
-          <div className="flex items-center gap-3">
-            {PERFORMANCE_SCORES.map((s) => (
-              <ScoreBadge key={s.label} {...s} />
-            ))}
-          </div>
+          </ul>
 
           <a
-            href={`https://github.com/${repo}`}
+            href={`https://github.com/${REPO}`}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Ver repositorio en GitHub"
-            className="w-11 h-11 rounded-full bg-[#1c1f29] hover:bg-[#242833] flex items-center justify-center transition-colors duration-200 shrink-0"
+            className="md3-button md3-button--icon md3-button--outlined md3-state"
           >
-            <Github className="w-[18px] h-[18px] text-[#f5f5f7]" strokeWidth={1.75} />
+            <Github size={18} strokeWidth={1.75} aria-hidden="true" />
+            {t("footer.repo", "Ver repositorio")}
           </a>
+        </div>
+
+        <hr className="md3-divider my-6" />
+
+        {/* Copyright + redes de contacto */}
+        <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-2">
+          <p className="md3-body-medium">
+            © {year} Luis Angel Rocha Ronquillo
+            <span className="md3-footer__separator mx-2" aria-hidden="true">
+              •
+            </span>
+            <span className="md3-label-medium">{APP_VERSION}</span>
+          </p>
+
+          <ul className="-mx-3 flex items-center">
+            {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
+              <li key={label}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  data-md3-tooltip={label}
+                  className="md3-icon-button md3-state"
+                >
+                  <Icon size={20} strokeWidth={1.75} aria-hidden="true" />
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </footer>

@@ -1,0 +1,84 @@
+/* Paneles */
+.md3-resume__panes {
+  display: grid;
+  gap: 1rem;
+}
+@media (min-width: 64rem) {
+  .md3-resume__panes {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .md3-resume__pane--supporting {
+    position: sticky;
+    top: calc(var(--md3-top-app-bar-height) + 1.5rem);
+  }
+}
+
+.md3-resume__icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: var(--md-sys-shape-corner-medium);
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+/* Línea de tiempo */
+.md3-timeline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.md3-timeline__item {
+  position: relative;
+  padding-inline-start: 1.5rem;
+  padding-block-end: 1.5rem;
+}
+.md3-timeline__item:last-child {
+  padding-block-end: 0;
+}
+/* Riel */
+.md3-timeline__item::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: calc(0.25rem - 0.5px);
+  top: 0.75rem;
+  bottom: -0.25rem;
+  width: 1px;
+  background: var(--md-sys-color-outline-variant);
+}
+.md3-timeline__item:last-child::before {
+  display: none;
+}
+
+.md3-timeline__item::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.25rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--md-sys-shape-corner-full);
+  background: var(--md-sys-color-primary);
+}
+
+.md3-timeline__overline,
+.md3-timeline__supporting {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.md3-timeline__tasks {
+  margin-block-start: 0.75rem;
+  padding-inline-start: 1.125rem;
+  display: grid;
+  gap: 0.375rem;
+  list-style: disc;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.md3-timeline__tasks > li::marker {
+  color: var(--md-sys-color-primary);
+}

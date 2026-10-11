@@ -1,0 +1,108 @@
+
+.md3-hero {
+  padding-block: calc(var(--md3-top-app-bar-height) + 1.5rem) 1.5rem;
+  background: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+}
+
+/* Card */
+.md3-hero-card {
+  padding: 0.75rem;
+  border-radius: var(--md-sys-shape-corner-extra-large);
+  background: var(--md-sys-color-surface-container);
+  color: var(--md-sys-color-on-surface);
+  animation: md3-hero-enter var(--md-sys-motion-duration-medium4)
+    var(--md-sys-motion-easing-emphasized-decelerate) both;
+}
+@keyframes md3-hero-enter {
+  from {
+    opacity: 0;
+    translate: 0 1rem;
+  }
+}
+
+/* Media */
+.md3-hero-media {
+  position: relative;
+  height: 18rem;
+  overflow: hidden;
+  border-radius: var(--md-sys-shape-corner-large);
+  background: var(--md-sys-color-surface-container-highest);
+  color: var(--md-sys-color-on-surface);
+}
+
+@media (min-width: 40rem) {
+  .md3-hero-media {
+    width: clamp(12.5rem, 38%, 20rem);
+    height: auto;
+    aspect-ratio: 1;
+  }
+}
+.md3-hero-media__fallback {
+  width: 6rem;
+  height: 6rem;
+  border-radius: var(--md-sys-shape-corner-full);
+  background: var(--md-sys-color-surface-container);
+}
+.md3-hero-media__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* Indicador online */
+.md3-presence {
+  position: absolute;
+  inset-block-end: 1rem;
+  inset-inline-end: 1rem;
+  width: 1rem;
+  height: 1rem;
+  border-radius: var(--md-sys-shape-corner-full);
+  background: var(--md-extended-color-online);
+  box-shadow: 0 0 0 2px var(--md-sys-color-surface-container);
+}
+.md3-presence::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  animation: md3-presence-ping 1.5s var(--md-sys-motion-easing-standard-decelerate) infinite;
+}
+@keyframes md3-presence-ping {
+  from {
+    opacity: 0.75;
+    scale: 1;
+  }
+  to {
+    opacity: 0;
+    scale: 2.25;
+  }
+}
+
+/* Cabecera */
+.md3-hero__name {
+  font: var(--md-sys-typescale-emphasized-headline-small);
+  letter-spacing: var(--md-sys-typescale-emphasized-headline-small-tracking);
+  overflow-wrap: anywhere;
+}
+@media (min-width: 40rem) {
+  .md3-hero__name {
+    font: var(--md-sys-typescale-emphasized-headline-large);
+    letter-spacing: var(--md-sys-typescale-emphasized-headline-large-tracking);
+  }
+}
+.md3-hero__role {
+  color: var(--md-sys-color-primary);
+}
+
+/* Preferencias del usuario */
+@media (prefers-reduced-motion: reduce) {
+  .md3-hero-card,
+  .md3-presence::after {
+    animation: none;
+  }
+}

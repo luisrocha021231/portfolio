@@ -1,0 +1,55 @@
+/* Habilidades */
+
+/* Cuadrícula uniforme */
+.md3-skill-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (min-width: 22.5rem) {
+  .md3-skill-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (min-width: 40rem) {
+  .md3-skill-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+@media (min-width: 64rem) {
+  .md3-skill-grid {
+    gap: 1rem;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+}
+
+/* Tarjeta */
+.md3-skill-tile {
+  padding: 1.25rem 0.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+/* Placa */
+.md3-skill-tile__logo {
+  width: 3rem;
+  height: 3rem;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: var(--md-sys-shape-corner-full);
+  background: var(--md-sys-color-inverse-surface);
+  color: var(--md-sys-color-inverse-on-surface);
+  font: var(--md-sys-typescale-title-medium);
+}
+.md3-skill-tile__logo img {
+  width: 1.75rem;
+  height: 1.75rem;
+  object-fit: contain;
+}
+.md3-skill-tile__name {
+  overflow-wrap: anywhere;
+}

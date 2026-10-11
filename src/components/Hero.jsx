@@ -1,129 +1,171 @@
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useState } from "react";
 import { Mail, Phone, MapPin, Linkedin, Github, MessageCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
+import "../styles/md3-tokens.css";
+import "../styles/md3-base.css";
+import "../styles/Hero.css";
+
 const INITIALS = "LR";
+const AVATAR_SRC = "/avatarMio.webp";
 
 const CONTACT_ROWS = [
-  { icon: Mail, titleKey: "hero.email-title", contentKey: "hero.email-content" },
-  { icon: Phone, titleKey: "hero.phone-title", contentKey: "hero.phone-content-2" },
+  {
+    icon: Mail,
+    titleKey: "hero.email-title",
+    contentKey: "hero.email-content",
+    toHref: (value) => `mailto:${value}`,
+  },
+  {
+    icon: Phone,
+    titleKey: "hero.phone-title",
+    contentKey: "hero.phone-content-2",
+    toHref: (value) => `tel:${value.replace(/[^\d+]/g, "")}`,
+  },
   { icon: MapPin, titleKey: "hero.location-title", contentKey: "hero.location-content" },
 ];
 
 const SOCIAL_LINKS = [
-  { icon: Linkedin, href: "https://linkedin.com/in/luisrocharonq", label: "LinkedIn de Luis Rocha" },
-  { icon: Github, href: "https://github.com/luisrocha021231", label: "GitHub de Luis Rocha" },
-  { icon: MessageCircle, href: "https://wa.me/525664073124", label: "WhatsApp de Luis Rocha" },
+  {
+    icon: Linkedin,
+    name: "LinkedIn",
+    href: "https://linkedin.com/in/luisrocharonq",
+    label: "LinkedIn de Luis Rocha",
+  },
+  {
+    icon: Github,
+    name: "GitHub",
+    href: "https://github.com/luisrocha021231",
+    label: "GitHub de Luis Rocha",
+  },
+  {
+    icon: MessageCircle,
+    name: "WhatsApp",
+    href: "https://wa.me/525664073124",
+    label: "WhatsApp de Luis Rocha",
+  },
 ];
 
-function AvatarPanel({ size }) {
-  const clamped = size ? Math.min(Math.max(size, 200), 320) : null;
-  const desktopStyle = clamped ? { "--avatar-size": `${clamped}px` } : undefined;
+function HeroMedia({ alt }) {
+  const [failed, setFailed] = useState(false);
 
   return (
-    <div
-      className="relative shrink-0 bg-[#1c1f29] flex items-center justify-center w-full h-72 sm:h-[var(--avatar-size)] sm:w-[var(--avatar-size)] overflow-hidden"
-      style={desktopStyle}
-    >
-      {/* Placeholder de iniciales */}
-      <div className="w-24 h-24 rounded-full bg-[#2a2e3a] flex items-center justify-center">
-        <span
-          className="text-3xl font-bold text-[#f5f5f7]"
-          style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-        >
-          {INITIALS}
-        </span>
-      </div>
-
-      {
-      <img
-        src="/avatarMio.webp"
-        alt="Foto de perfil"
-        className="absolute inset-0 w-full h-full object-cover object-top"
-      />}
-
-      <span className="absolute bottom-4 right-4 flex h-5 w-5 z-10">
-        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#37f712] opacity-75" />
-        <span className="relative inline-flex rounded-full h-5 w-5 bg-[#37f712] border-2 border-[#1c1f29]" />
+    <div className="md3-hero-media flex shrink-0 items-center justify-center">
+      <span
+        className="md3-hero-media__fallback md3-headline-small-emphasized flex items-center justify-center"
+        aria-hidden="true"
+      >
+        {INITIALS}
       </span>
+
+      {!failed && (
+        <img
+          src={AVATAR_SRC}
+          alt={alt}
+          decoding="async"
+          className="md3-hero-media__image"
+          onError={() => setFailed(true)}
+        />
+      )}
+
+      {/* <span className="md3-presence" aria-hidden="true" /> */}
     </div>
+  );
+}
+
+function withBreakHints(text) {
+  return text.split(/(?=@)/).map((part, i) => (
+    <Fragment key={i}>
+      {i > 0 && <wbr />}
+      {part}
+    </Fragment>
+  ));
+}
+
+function ContactItem({ icon: Icon, title, content, href }) {
+  const body = (
+    <>
+      <span className="md3-list-item__leading" aria-hidden="true">
+        <Icon size={20} strokeWidth={1.75} />
+      </span>
+      <span className="flex min-w-0 flex-col">
+        <span className="md3-list-item__overline md3-label-small">{title}</span>
+        <span className="md3-list-item__headline md3-body-large">{withBreakHints(content)}</span>
+      </span>
+    </>
+  );
+
+  return (
+    <li>
+      {href ? (
+        <a href={href} className="md3-list-item md3-state">
+          {body}
+        </a>
+      ) : (
+        <div className="md3-list-item">{body}</div>
+      )}
+    </li>
   );
 }
 
 export default function Hero() {
   const { t } = useTranslation();
-  const infoRef = useRef(null);
-  const [avatarSize, setAvatarSize] = useState(null);
-
-  useEffect(() => {
-    const el = infoRef.current;
-    if (!el) return;
-
-    const update = () => {
-      const next = el.offsetHeight;
-      setAvatarSize((prev) => (prev !== null && Math.abs(prev - next) < 1 ? prev : next));
-    };
-    update();
-
-    const ro = new ResizeObserver(update);
-    ro.observe(el);
-    window.addEventListener("resize", update);
-
-    return () => {
-      ro.disconnect();
-      window.removeEventListener("resize", update);
-    };
-  }, []);
+  const name = t("hero.name");
 
   return (
     <section
       id="inicio"
-      className="min-h-screen flex flex-col justify-center items-center bg-[#12141c] text-[#f5f5f7] px-4 pt-20"
-      style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+      aria-labelledby="hero-name"
+      className="md3-hero flex min-h-[100svh] flex-col items-center justify-center px-4 sm:px-6"
     >
-      <div className="w-full max-w-3xl rounded-2xl overflow-hidden bg-[#171922] border border-white/[0.08] shadow-[0_24px_60px_rgba(0,0,0,0.4)] flex flex-col">
-        <div className="flex flex-col sm:flex-row">
-          <AvatarPanel size={avatarSize} />
+      <div className="md3-hero-card w-full max-w-3xl">
+        <div className="flex flex-col gap-2 sm:flex-row">
+          <HeroMedia alt={t("hero.photo-alt", { defaultValue: "Foto de {{name}}", name })} />
 
-          {/* Columna info */}
-          <div ref={infoRef} className="flex-1 min-w-0 sm:min-w-[320px] px-8 py-9 flex flex-col justify-center">
-            <h1 className="text-[26px] leading-tight font-bold break-words">{t("hero.name")}</h1>
-            <p className="mt-2 text-[14px] font-semibold text-[#ec4b6a]">{t("hero.desc")}</p>
-
-            <div className="mt-7 space-y-5">
-              {CONTACT_ROWS.map(({ icon: Icon, titleKey, contentKey }) => (
-                <div
-                  key={titleKey}
-                  className="flex items-center gap-4 pb-5 border-b border-white/[0.06] last:border-0 last:pb-0"
-                >
-                  <div className="w-9 h-9 rounded-lg bg-[#1c1f29] flex items-center justify-center shrink-0">
-                    <Icon className="w-[17px] h-[17px] text-[#9a9aa5]" strokeWidth={1.75} />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-[10px] tracking-wide text-[#9a9aa5] uppercase">{t(titleKey)}</p>
-                    <p className="text-[15px] truncate">{t(contentKey)}</p>
-                  </div>
-                </div>
-              ))}
+          {/* Columna de información */}
+          <div className="flex min-w-0 flex-1 flex-col justify-center py-4 sm:px-2 sm:py-6">
+            <div className="px-4">
+              <h1 id="hero-name" className="md3-hero__name">
+                {name}
+              </h1>
+              <p className="md3-hero__role md3-title-medium mt-1">{t("hero.desc")}</p>
             </div>
+
+            <ul className="mt-4 flex flex-col">
+              {CONTACT_ROWS.map(({ icon, titleKey, contentKey, toHref }) => {
+                const content = t(contentKey);
+                return (
+                  <ContactItem
+                    key={titleKey}
+                    icon={icon}
+                    title={t(titleKey)}
+                    content={content}
+                    href={toHref?.(content)}
+                  />
+                );
+              })}
+            </ul>
           </div>
         </div>
 
-        {/* Footer: */}
-        <div className="flex justify-center gap-3 py-5 border-t border-white/[0.06]">
-          {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={label}
-              className="w-10 h-10 rounded-full bg-[#1c1f29] flex items-center justify-center text-[#9a9aa5] hover:text-[#ec4b6a] transition-colors duration-200"
-            >
-              <Icon className="w-[17px] h-[17px]" strokeWidth={1.75} />
-            </a>
+        {/* Acciones */}
+        <hr className="md3-divider mx-4 mt-3" />
+        <ul className="flex justify-center gap-1 pt-3">
+          {SOCIAL_LINKS.map(({ icon: Icon, name: network, href, label }) => (
+            <li key={network}>
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                data-md3-tooltip={network}
+                className="md3-icon-button md3-icon-button--tonal md3-state"
+              >
+                <Icon size={20} strokeWidth={1.75} aria-hidden="true" />
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

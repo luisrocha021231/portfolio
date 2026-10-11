@@ -1,5 +1,9 @@
 import { useTranslation } from "react-i18next";
-import { Github, Play } from "lucide-react";
+import { Github, Play, FolderPlus } from "lucide-react";
+
+import "../styles/md3-tokens.css";
+import "../styles/md3-base.css";
+import "../styles/Projects.css";
 
 const PROJECTS = [
   {
@@ -21,79 +25,99 @@ const PROJECTS = [
   },
 ];
 
+const HAS_FREE_SLOT = PROJECTS.length % 2 === 1;
+
+function ProjectCard({ project, t }) {
+  const { key, img, link, linkDemo } = project;
+  const title = t(`projects.items.${key}.title`);
+
+  return (
+    <li className="md3-card md3-project flex flex-col">
+      {img && (
+        // Decorativa
+        <img
+          src={img}
+          alt=""
+          className="md3-card__media"
+          loading="lazy"
+          decoding="async"
+          onError={(e) => {
+            e.currentTarget.style.display = "none";
+          }}
+        />
+      )}
+
+      {/* Contenido */}
+      <div className="flex-1 px-6 pt-6">
+        <h3 className="md3-title-large-emphasized">{title}</h3>
+        <p className="md3-card__supporting md3-body-medium mt-2">
+          {t(`projects.items.${key}.desc`)}
+        </p>
+      </div>
+
+      {/* Acciones */}
+      <div className="md3-project__actions flex flex-wrap justify-end gap-2 p-6">
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${t(`projects.items.${key}.button`)}: ${title}`}
+          className="md3-button md3-button--icon md3-button--outlined md3-state"
+        >
+          <Github size={18} strokeWidth={1.75} aria-hidden="true" />
+          {t(`projects.items.${key}.button`)}
+        </a>
+
+        {linkDemo && (
+          <a
+            href={linkDemo}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${t(`projects.items.${key}.demostration`)}: ${title}`}
+            className="md3-button md3-button--icon md3-button--tonal md3-state"
+          >
+            <Play size={18} strokeWidth={1.75} aria-hidden="true" />
+            {t(`projects.items.${key}.demostration`)}
+          </a>
+        )}
+      </div>
+    </li>
+  );
+}
+
 export default function Projects() {
   const { t } = useTranslation();
 
   return (
-    <section
-      id="proyectos"
-      className="py-24 bg-[#12141c] text-[#f5f5f7]"
-      style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-    >
-      <div className="max-w-5xl mx-auto px-6">
-        <h2 className="text-3xl font-bold mb-12 text-[#ec4b6a]">{t("projects.title")}</h2>
+    <section id="proyectos" aria-labelledby="projects-title" className="md3-section py-16 sm:py-24">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6">
+        <h2 id="projects-title" className="md3-section__title md3-headline-medium-emphasized">
+          {t("projects.title")}
+        </h2>
 
         {/* Grid de proyectos */}
-        <div className="grid md:grid-cols-2 gap-6">
-          {PROJECTS.map((p) => (
-            <div
-              key={p.key}
-              className="rounded-2xl overflow-hidden bg-[#171922] border border-white/[0.08] hover:border-[#ec4b6a]/40 transition-colors duration-200 flex flex-col h-full"
-            >
-              {p.img && (
-                <img
-                  src={p.img}
-                  alt={t(`projects.items.${p.key}.title`)}
-                  className="w-full h-44 object-cover shrink-0"
-                  loading="lazy"
-                  decoding="async"
-                  onError={(e) => {
-                    e.currentTarget.style.display = "none";
-                  }}
-                />
-              )}
-
-              {/* Contenido: crece para empujar el footer hacia abajo */}
-              <div className="p-6 flex-1">
-                <h3 className="font-bold text-lg">{t(`projects.items.${p.key}.title`)}</h3>
-                <p className="text-[#9a9aa5] text-[14px] mt-2 leading-relaxed">
-                  {t(`projects.items.${p.key}.desc`)}
-                </p>
-              </div>
-
-              {/* Footer: siempre en la misma posición relativa, sin importar el largo del texto */}
-              <div className="flex gap-3 px-6 pb-6 pt-1">
-                <a
-                  href={p.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 bg-[#1c1f29] hover:bg-[#242833] px-4 py-2.5 rounded-lg text-[13px] font-semibold transition-colors duration-200"
-                >
-                  <Github className="w-4 h-4" strokeWidth={1.75} />
-                  {t(`projects.items.${p.key}.button`)}
-                </a>
-
-                {p.linkDemo && (
-                  <a
-                    href={p.linkDemo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-2 bg-[#ec4b6a]/10 hover:bg-[#ec4b6a]/20 text-[#ec4b6a] px-4 py-2.5 rounded-lg text-[13px] font-semibold transition-colors duration-200"
-                  >
-                    <Play className="w-4 h-4" strokeWidth={1.75} />
-                    {t(`projects.items.${p.key}.demostration`)}
-                  </a>
-                )}
-              </div>
-            </div>
+        <ul className="mt-8 grid gap-4 md:grid-cols-2 md:gap-6">
+          {PROJECTS.map((project) => (
+            <ProjectCard key={project.key} project={project} t={t} />
           ))}
-        </div>
 
-        {/* Más proyectos pronto */}
-        <p className="mt-12 text-center text-[#9a9aa5] text-[15px]">
-          {t("projects.more")}
-          <span className="animate-pulse">...</span>
-        </p>
+          {/* Más proyectos pronto */}
+          <li
+            className={`md3-card md3-card--outlined md3-projects__more flex flex-col items-center justify-center gap-3 ${
+              HAS_FREE_SLOT ? "" : "md3-projects__more--wide"
+            }`}
+          >
+            <span className="md3-projects__more-icon" aria-hidden="true">
+              <FolderPlus size={24} strokeWidth={1.75} />
+            </span>
+            <p className="md3-body-large">
+              {t("projects.more")}
+              <span className="motion-safe:animate-pulse" aria-hidden="true">
+                ...
+              </span>
+            </p>
+          </li>
+        </ul>
       </div>
     </section>
   );

@@ -1,0 +1,100 @@
+:root {
+  color-scheme: dark;
+
+  /* ── Color */
+  --md-sys-color-primary: #55e08c;
+  --md-sys-color-on-primary: #00391c;
+  --md-sys-color-primary-container: #32c373; /* color primario */
+  --md-sys-color-on-primary-container: #004a26;
+
+  --md-sys-color-secondary: #9fd3ab;
+  --md-sys-color-on-secondary: #04391c;
+  --md-sys-color-secondary-container: #205031;
+  --md-sys-color-on-secondary-container: #baefc5;
+
+  --md-sys-color-tertiary: #a6c9ff;
+  --md-sys-color-on-tertiary: #00315e;
+  --md-sys-color-tertiary-container: #72aeff;
+  --md-sys-color-on-tertiary-container: #004079;
+
+  --md-sys-color-error: #ffb4ab;
+  --md-sys-color-on-error: #690005;
+
+  --md-sys-color-surface: #12141c; /* background */
+  --md-sys-color-on-surface: #e2e1ec;
+  --md-sys-color-on-surface-variant: #c5c6d3;
+  --md-sys-color-surface-container-lowest: #0c0e15;
+  --md-sys-color-surface-container-low: #1a1b23;
+  --md-sys-color-surface-container: #1e1f27;
+  --md-sys-color-surface-container-high: #282a31;
+  --md-sys-color-surface-container-highest: #33343c;
+
+  --md-sys-color-inverse-surface: #e2e1ec;
+  --md-sys-color-inverse-on-surface: #2e3038;
+
+  --md-sys-color-outline: #8e909c;
+  --md-sys-color-outline-variant: #444651;
+  --md-sys-color-scrim: #000000;
+  --md-sys-color-shadow: #000000;
+
+  /* Color extendido */
+  --md-extended-color-online: #37f712;
+
+  /* Forma */
+  --md-sys-shape-corner-extra-small: 4px;
+  --md-sys-shape-corner-small: 8px;
+  --md-sys-shape-corner-medium: 12px;
+  --md-sys-shape-corner-large: 16px;
+  --md-sys-shape-corner-extra-large: 28px;
+  --md-sys-shape-corner-full: 9999px;
+
+  /* Tipografía */
+  --md-ref-typeface-brand: "Space Grotesk", system-ui, sans-serif;
+
+  /* font shorthand */
+  --md-sys-typescale-emphasized-headline-large: 700 2rem/2.5rem var(--md-ref-typeface-brand);
+  --md-sys-typescale-emphasized-headline-large-tracking: 0;
+  --md-sys-typescale-emphasized-headline-medium: 700 1.75rem/2.25rem var(--md-ref-typeface-brand);
+  --md-sys-typescale-emphasized-headline-medium-tracking: 0;
+  --md-sys-typescale-emphasized-headline-small: 700 1.5rem/2rem var(--md-ref-typeface-brand);
+  --md-sys-typescale-emphasized-headline-small-tracking: 0;
+  --md-sys-typescale-emphasized-title-large: 700 1.375rem/1.75rem var(--md-ref-typeface-brand);
+  --md-sys-typescale-emphasized-title-large-tracking: 0;
+  --md-sys-typescale-title-medium: 500 1rem/1.5rem var(--md-ref-typeface-brand);
+  --md-sys-typescale-title-medium-tracking: 0.009375rem;
+  --md-sys-typescale-title-small: 500 0.875rem/1.25rem var(--md-ref-typeface-brand);
+  --md-sys-typescale-title-small-tracking: 0.00625rem;
+  --md-sys-typescale-label-large: 500 0.875rem/1.25rem var(--md-ref-typeface-brand);
+  --md-sys-typescale-label-large-tracking: 0.00625rem;
+  --md-sys-typescale-label-medium: 500 0.75rem/1rem var(--md-ref-typeface-brand);
+  --md-sys-typescale-label-medium-tracking: 0.03125rem;
+  --md-sys-typescale-label-small: 500 0.6875rem/1rem var(--md-ref-typeface-brand);
+  --md-sys-typescale-label-small-tracking: 0.03125rem;
+  --md-sys-typescale-body-large: 400 1rem/1.5rem var(--md-ref-typeface-brand);
+  --md-sys-typescale-body-large-tracking: 0.03125rem;
+  --md-sys-typescale-body-medium: 400 0.875rem/1.25rem var(--md-ref-typeface-brand);
+  --md-sys-typescale-body-medium-tracking: 0.015625rem;
+  --md-sys-typescale-body-small: 400 0.75rem/1rem var(--md-ref-typeface-brand);
+  --md-sys-typescale-body-small-tracking: 0.025rem;
+
+  /* Estado */
+  --md-sys-state-hover-state-layer-opacity: 0.08;
+  --md-sys-state-focus-state-layer-opacity: 0.1;
+  --md-sys-state-pressed-state-layer-opacity: 0.1;
+
+  /* Movimiento */
+  --md-sys-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --md-sys-motion-easing-standard-decelerate: cubic-bezier(0, 0, 0, 1);
+  --md-sys-motion-easing-standard-accelerate: cubic-bezier(0.3, 0, 1, 1);
+  --md-sys-motion-easing-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --md-sys-motion-easing-emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --md-sys-motion-duration-short3: 150ms;
+  --md-sys-motion-duration-short4: 200ms;
+  --md-sys-motion-duration-medium4: 400ms;
+
+  /* Elevación */
+  --md-sys-elevation-level2: 0 1px 2px rgb(0 0 0 / 0.3), 0 2px 6px 2px rgb(0 0 0 / 0.15);
+
+  /* Altura del top app bar */
+  --md3-top-app-bar-height: 4rem;
+}
