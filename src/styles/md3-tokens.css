@@ -49,7 +49,8 @@
   --md-sys-shape-corner-full: 9999px;
 
   /* Tipografía */
-  --md-ref-typeface-brand: "Space Grotesk", system-ui, sans-serif;
+  /* --md-ref-typeface-brand: "Space Grotesk", system-ui, sans-serif; */
+  --md-ref-typeface-brand: "Roboto Flex", system-ui, sans-serif;
 
   /* font shorthand */
   --md-sys-typescale-emphasized-headline-large: 700 2rem/2.5rem var(--md-ref-typeface-brand);
